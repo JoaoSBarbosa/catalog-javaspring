@@ -1,6 +1,7 @@
 package br.com.joaosbarbosa.jbcatalog.resources;
 
 
+import br.com.joaosbarbosa.jbcatalog.dto.CategoryDTO;
 import br.com.joaosbarbosa.jbcatalog.entities.Category;
 import br.com.joaosbarbosa.jbcatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,9 @@ public class CategoryResource {
 
     //ResponseEntity é um objeto do tipo genérico<> Spring responsável por encapsular resposta HTTP
     @GetMapping
-    public ResponseEntity<List<Category>> findAll(){ //
-        List<Category> list =  categoryService.findAll();
-         return ResponseEntity.ok().body(list);
+    public ResponseEntity<List<CategoryDTO>> findAll(){ //
+        List<CategoryDTO> list =  categoryService.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
 }

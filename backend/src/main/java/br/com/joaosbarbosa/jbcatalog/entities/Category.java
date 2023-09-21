@@ -8,6 +8,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "TB_CATEGORIA")
 public class Category implements Serializable {
+    private static final long serialVersionUID =1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cat_id")
