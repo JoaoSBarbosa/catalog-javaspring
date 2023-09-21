@@ -3,6 +3,7 @@ package br.com.joaosbarbosa.jbcatalog.services;
 import br.com.joaosbarbosa.jbcatalog.dto.CategoryDTO;
 import br.com.joaosbarbosa.jbcatalog.entities.Category;
 import br.com.joaosbarbosa.jbcatalog.repositories.CategoryRepository;
+import br.com.joaosbarbosa.jbcatalog.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public CategoryDTO searchById(Long id){
         Optional<Category> categoriaOptional = categoryRepository.findById(id);
-        return new CategoryDTO(categoriaOptional.get());
+        return new CategoryDTO(categoriaOptional.orElseThrow(()-> new EntityNotFoundException("Objeto não localizado")));
     }
 
 
