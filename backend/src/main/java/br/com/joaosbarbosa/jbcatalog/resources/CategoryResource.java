@@ -1,16 +1,10 @@
 package br.com.joaosbarbosa.jbcatalog.resources;
-
-
 import br.com.joaosbarbosa.jbcatalog.dto.CategoryDTO;
-import br.com.joaosbarbosa.jbcatalog.entities.Category;
 import br.com.joaosbarbosa.jbcatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,5 +20,11 @@ public class CategoryResource {
         List<CategoryDTO> list =  categoryService.findAll();
         return ResponseEntity.ok().body(list);
     }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> searchById(@PathVariable long id){
+        CategoryDTO categoryDTO = categoryService.searchById(id);
+        return ResponseEntity.ok().body(categoryDTO);
+    }
+
 
 }
