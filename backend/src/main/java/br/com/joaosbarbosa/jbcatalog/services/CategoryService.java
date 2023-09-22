@@ -34,6 +34,14 @@ public class CategoryService {
         Optional<Category> categoriaOptional = categoryRepository.findById(id);
         return new CategoryDTO(categoriaOptional.orElseThrow(()-> new EntityNotFoundException("Objeto não localizado")));
     }
+    public CategoryDTO insert(CategoryDTO dto){
+        Category category = new Category();
+        category.setName(dto.getName());
+
+        category = categoryRepository.save(category);
+        return new CategoryDTO(category);
+
+    }
 
 
 
