@@ -3,9 +3,12 @@ package br.com.joaosbarbosa.jbcatalog.services;
 import br.com.joaosbarbosa.jbcatalog.dto.CategoryDTO;
 import br.com.joaosbarbosa.jbcatalog.entities.Category;
 import br.com.joaosbarbosa.jbcatalog.repositories.CategoryRepository;
+import br.com.joaosbarbosa.jbcatalog.services.exceptions.DataBaseException;
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +58,20 @@ public class CategoryService {
             return new CategoryDTO(category);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("ID '" + id + "' não localizado");
+        }
+    }
+
+    public void delete(Long id) {
+        try {
+            Optional<Category> category = categoryRepository.findById(id);
+
+            if (category.isPresent()) {
+                categoryRepository.deleteById(id);
+            } else {
+                throw new ResourceNotFoundException("ID NÃO LOCALIDADO => " + id);
+            }
+        } catch (DataIntegrityViolationException e) {
+            throw new DataBaseException("Violaçao de integridade");
         }
     }
 }
