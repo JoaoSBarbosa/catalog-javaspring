@@ -1,8 +1,10 @@
 package br.com.joaosbarbosa.jbcatalog.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -15,7 +17,17 @@ public class Category implements Serializable {
     private Long id;
     @Column(name = "cat_name")
     private String name;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_criacao")
+    private Date created_At;
     public Category(){}
+
+    public Category(Long id, String name, Date createdAt) {
+        this.id = id;
+        this.name = name;
+        this.created_At = createdAt;
+    }
 
     public Category(Long id, String name) {
         this.id = id;
@@ -36,6 +48,14 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getCreatedAt() {
+        return created_At;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.created_At = createdAt;
     }
 
     @Override
