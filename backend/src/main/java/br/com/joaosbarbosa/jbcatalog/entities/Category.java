@@ -8,18 +8,16 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TB_CATEGORIA")
+@Table(name = "tb_category")
 public class Category implements Serializable {
     private static final long serialVersionUID =1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cat_id")
     private Long id;
-    @Column(name = "cat_name")
     private String name;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_criacao")
+    @Column(name = "created_At")
     private Date created_At;
     public Category(){}
 
