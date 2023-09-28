@@ -1,7 +1,10 @@
 package br.com.joaosbarbosa.jbcatalog.services;
 
+import br.com.joaosbarbosa.jbcatalog.dto.CategoryDTO;
 import br.com.joaosbarbosa.jbcatalog.dto.ProductDTO;
+import br.com.joaosbarbosa.jbcatalog.entities.Category;
 import br.com.joaosbarbosa.jbcatalog.entities.Product;
+import br.com.joaosbarbosa.jbcatalog.repositories.CategoryRepository;
 import br.com.joaosbarbosa.jbcatalog.repositories.ProductRepository;
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.DataBaseException;
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.ResourceNotFoundException;
@@ -19,6 +22,8 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAllPages(PageRequest pageRequest) {
@@ -37,9 +42,9 @@ public class ProductService {
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
         Product product = new Product();
-        product.setName(dto.getName());
+        copyDtoToEntity(dto,product);
 
-        productRepository.save(product);
+        product = productRepository.save(product);
         return new ProductDTO(product);
     }
 
@@ -47,10 +52,10 @@ public class ProductService {
     public ProductDTO update(ProductDTO dto, Long id) {
         try {
             Product product = productRepository.getOne(id);
-            product.setName(dto.getName());
-
+            copyDtoToEntity(dto,product);
             product = productRepository.save(product);
             return new ProductDTO(product);
+
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("ID '" + id + "' não localizado");
         }
@@ -67,6 +72,24 @@ public class ProductService {
             }
         } catch (DataIntegrityViolationException e) {
             throw new DataBaseException("Violaçao de integridade");
+        }
+    }
+
+
+    private void copyDtoToEntity(ProductDTO dto, Product entity) {
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setDate(dto.getDate());
+        entity.setPrice(dto.getPrice());
+        entity.setImgUrl(dto.getImgUrl());
+
+        // Limpando as categorias existentes
+        entity.getCategories().clear();
+
+        // Percorrendo todas as categorias do DTO e associando ao produto
+        for (CategoryDTO categoryDTO : dto.getCategories()) {
+            Category category = categoryRepository.getOne(categoryDTO.getId());
+            entity.getCategories().add(category);
         }
     }
 }

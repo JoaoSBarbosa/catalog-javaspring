@@ -5,7 +5,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -19,6 +21,16 @@ public class Category implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_At")
     private Date created_At;
+
+
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
+
+    // Getter para products
+    public Set<Product> getProducts() {
+        return products;
+    }
     public Category(){}
 
     public Category(Long id, String name, Date createdAt) {
