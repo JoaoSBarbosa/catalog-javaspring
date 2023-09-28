@@ -22,14 +22,14 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant date;
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    Set<Category> categories = new HashSet<>();
+    Set<Category> categories = new HashSet<>(); //Definido um Set em vez de list para garantir que um mesmo produto não tenha a mesma categoria mais de uma vez.
 
     public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {
         this.id = id;

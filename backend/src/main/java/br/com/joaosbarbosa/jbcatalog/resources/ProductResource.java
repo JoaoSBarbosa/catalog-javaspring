@@ -1,6 +1,5 @@
 package br.com.joaosbarbosa.jbcatalog.resources;
 
-import br.com.joaosbarbosa.jbcatalog.dto.CategoryDTO;
 import br.com.joaosbarbosa.jbcatalog.dto.ProductDTO;
 import br.com.joaosbarbosa.jbcatalog.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/produtos")
@@ -21,7 +19,7 @@ public class ProductResource {
     @Autowired private ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductDTO> insert(ProductDTO dto){
+    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto){
         dto = productService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
@@ -29,7 +27,7 @@ public class ProductResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> searchById(@PathVariable Long id){
-        ProductDTO productDTO = productService.findById(id);
+        ProductDTO productDTO = productService.searchById(id);
         return ResponseEntity.ok().body(productDTO);
     }
 

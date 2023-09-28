@@ -17,8 +17,7 @@ import java.util.Optional;
 
 @Service
 public class CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
+    @Autowired private CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
     public Page<CategoryDTO> findAllPages(PageRequest pageRequest) {

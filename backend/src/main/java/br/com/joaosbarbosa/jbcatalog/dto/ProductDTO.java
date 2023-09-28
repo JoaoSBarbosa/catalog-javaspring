@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+// dto é para carregar dados com controller
 public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
@@ -17,7 +18,8 @@ public class ProductDTO implements Serializable {
     private String imgUrl;
     private Instant date;
 
-    private List<CategoryDTO> listCategory = new ArrayList<>();
+    //para ser possivel escolher uma categoria ao cadastrar um produto
+    private List<CategoryDTO> categories = new ArrayList<>();
 
     public ProductDTO(){}
 
@@ -39,10 +41,14 @@ public class ProductDTO implements Serializable {
         date = entity.getDate();
     }
 
+
+    // construtor para receber uma entidade e categorias
     public  ProductDTO(Product entity, Set<Category> categories){
        this(entity);
-       categories.forEach(category -> this.listCategory.add(new CategoryDTO(category)));
+       //percorrendo pela categoria recebida e para cada categoria adicIonar na lista de categorias do tipo CategoryDTO
+       categories.forEach(cat -> this.categories.add(new CategoryDTO(cat)));
     }
+
 
 
     public Long getId() {
@@ -94,10 +100,10 @@ public class ProductDTO implements Serializable {
     }
 
     public List<CategoryDTO> getListCategory() {
-        return listCategory;
+        return categories;
     }
 
     public void setListCategory(List<CategoryDTO> listCategory) {
-        this.listCategory = listCategory;
+        this.categories = listCategory;
     }
 }
