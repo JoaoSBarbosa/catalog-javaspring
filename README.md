@@ -128,19 +128,19 @@ O JBCatalog é um sistema de catálogo de produtos, onde é possível cadastrar,
 
 ### 1. Listar Produtos (Página 0, 5 produtos por página)
 
-![Listar Categorias](src/main/resource/img/print2.png)
+![Listar Categorias](./backend/src/main/resources/img/print2.png)
 
 ### 2. Buscar Produtos por ID (ID: 1)
 
-![Buscar Categoria por ID](src/main/resource/img/print1.png)
+![Buscar Categoria por ID](./backend/src/main/resources/img/print1.png)
 
 ### 3. Inserir Novo Produto
 
-![Inserir Nova Categoria](src/main/resource/img/print3.png)
+![Inserir Nova Categoria](./backend/src/main/resources/img/print3.png)
 
 ### 4. Atualizar produto(ID: 26)
 
-![Atualizar Categoria](src/main/resource/img/print4.png)
+![Atualizar Categoria](./backend/src/main/resources/img/print4.png)
 
 ### 5. Deletar Categoria (ID: 2)
 
