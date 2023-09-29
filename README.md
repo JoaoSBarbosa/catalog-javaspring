@@ -1,3 +1,5 @@
+![GitHub top language](https://img.shields.io/github/languages/top/JoaoSBarbosa/catalog-javaspring)
+
 # JBCatalog - Catalogo de loja em Java ☕
 
 ## Sobre o Projeto
@@ -128,11 +130,11 @@ O JBCatalog é um sistema de catálogo de produtos, onde é possível cadastrar,
 
 ### 1. Listar Produtos (Página 0, 5 produtos por página)
 
-![Listar Categorias](./backend/src/main/resources/img/print2.png)
+![Listar Categorias](./backend/src/main/resources/img/print1.png)
 
 ### 2. Buscar Produtos por ID (ID: 1)
 
-![Buscar Categoria por ID](./backend/src/main/resources/img/print1.png)
+![Buscar Categoria por ID](./backend/src/main/resources/img/print2.png)
 
 ### 3. Inserir Novo Produto
 
@@ -140,9 +142,9 @@ O JBCatalog é um sistema de catálogo de produtos, onde é possível cadastrar,
 
 ### 4. Atualizar produto(ID: 26)
 
-![Atualizar Categoria](./backend/src/main/resources/img/print4.png)
+![Atualizar Categoria](./backend/src/main/resources/img/update.png)
 
 ### 5. Deletar Categoria (ID: 2)
 
-![Deletar Categoria](src/main/resource/img/print5.png)
+![Deletar Categoria](./backend/src/main/resources/img/print5.png)
 
