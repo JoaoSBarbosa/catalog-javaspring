@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -20,8 +21,10 @@ public class Category implements Serializable {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_At")
-    private Date created_At;
+    private Instant created_At;
 
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant updatedAt;
 
 
     @ManyToMany(mappedBy = "categories")
@@ -33,7 +36,7 @@ public class Category implements Serializable {
     }
     public Category(){}
 
-    public Category(Long id, String name, Date createdAt) {
+    public Category(Long id, String name, Instant createdAt) {
         this.id = id;
         this.name = name;
         this.created_At = createdAt;
@@ -60,14 +63,24 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Date getCreatedAt() {
+    public Instant getCreatedAt() {
         return created_At;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.created_At = createdAt;
     }
 
+
+    @PreUpdate
+    public void preUpdate(){
+        updatedAt = Instant.now();
+    }
+
+    @PrePersist
+    public void prePersist(){
+        created_At = Instant.now();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
