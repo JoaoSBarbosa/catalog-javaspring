@@ -11,6 +11,7 @@ import br.com.joaosbarbosa.jbcatalog.services.exceptions.ResourceNotFoundExcepti
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAllPages(Pageable pageable) {
@@ -35,14 +36,14 @@ public class ProductService {
     public ProductDTO searchById(Long id) {
         Optional<Product> productOptional = productRepository.findById(id);
 
-        Product entity = productOptional.orElseThrow(()-> new ResourceNotFoundException("Objeto não localizado"));
+        Product entity = productOptional.orElseThrow(() -> new ResourceNotFoundException("Objeto não localizado"));
         return new ProductDTO(entity, entity.getCategories());
     }
 
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
         Product product = new Product();
-        copyDtoToEntity(dto,product);
+        copyDtoToEntity(dto, product);
 
         product = productRepository.save(product);
         return new ProductDTO(product);
@@ -52,7 +53,7 @@ public class ProductService {
     public ProductDTO update(ProductDTO dto, Long id) {
         try {
             Product product = productRepository.getOne(id);
-            copyDtoToEntity(dto,product);
+            copyDtoToEntity(dto, product);
             product = productRepository.save(product);
             return new ProductDTO(product);
 
@@ -61,20 +62,18 @@ public class ProductService {
         }
     }
 
+
     public void delete(Long id) {
         try {
-            Optional<Product> product = productRepository.findById(id);
-
-            if (product.isPresent()) {
-                productRepository.deleteById(id);
-            } else {
-                throw new ResourceNotFoundException("ID NÃO LOCALIDADO => " + id);
-            }
-        } catch (DataIntegrityViolationException e) {
-            throw new DataBaseException("Violaçao de integridade");
+            productRepository.deleteById(id);
+        }
+        catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DataBaseException("Integrity violation");
         }
     }
-
 
     private void copyDtoToEntity(ProductDTO dto, Product entity) {
         entity.setName(dto.getName());
