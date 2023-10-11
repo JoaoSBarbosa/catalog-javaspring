@@ -1,5 +1,6 @@
 package br.com.joaosbarbosa.jbcatalog.dto;
 
+import br.com.joaosbarbosa.jbcatalog.entities.Role;
 import br.com.joaosbarbosa.jbcatalog.entities.User;
 
 import java.io.Serializable;
@@ -26,7 +27,15 @@ public class UserDTO implements Serializable {
         firstName = entity.getFirstName();
         lastName = entity.getLastName();
         email = entity.getEmail();
+        //pegando a lista de roles que já vem no user
+        entity.getRoles().
+                //percorendo a lista. Para cada regra que veio, adiciona na lista roles
+                forEach(role -> this.roles.
+                        // instanciando um RoleDTO que será adicionado na lista role
+                        add(new RoleDTO(role)));
     }
+
+
 
     public UserDTO(long id, String firstName, String lastName, String email) {
         this.id = id;
