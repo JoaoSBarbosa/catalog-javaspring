@@ -8,6 +8,8 @@ import java.util.Set;
 
 //import javax.persistence.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -19,7 +21,9 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotEmpty(message = "Campo obrigatório")
     private String firstName;
+    @NotEmpty(message = "Este campo é obrigatório")
     private String lastName;
     @Column(unique = true)
     private String email;

@@ -1,6 +1,10 @@
 package br.com.joaosbarbosa.jbcatalog.dto;
 import br.com.joaosbarbosa.jbcatalog.entities.Category;
 import br.com.joaosbarbosa.jbcatalog.entities.Product;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -12,10 +16,15 @@ import java.util.Set;
 public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
+    @Size(min = 5, max = 60, message = "O campo deve ter entre 5 e 60 caracteres")
+    @NotBlank(message = "Este campo é obrigatório")
     private String name;
+    @NotBlank(message = "Este campo é obrigatório")
     private String description;
+    @Positive(message = "O preço deve ser um valor positivo")
     private Double price;
     private String imgUrl;
+    @PastOrPresent(message = "A data do produto não pode ser futura")
     private Instant date;
 
     //para ser possivel escolher uma categoria ao cadastrar um produto
