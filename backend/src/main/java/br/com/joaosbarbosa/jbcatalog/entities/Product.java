@@ -1,7 +1,8 @@
 package br.com.joaosbarbosa.jbcatalog.entities;
 
 
-import javax.persistence.*;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;

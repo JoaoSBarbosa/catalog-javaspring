@@ -10,6 +10,7 @@ import br.com.joaosbarbosa.jbcatalog.repositories.UserRepository;
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.DataBaseException;
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,8 +20,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.TransactionScoped;
+//import javax.persistence.EntityNotFoundException;
+//import javax.transaction.TransactionScoped;
 import java.util.Optional;
 
 @Service

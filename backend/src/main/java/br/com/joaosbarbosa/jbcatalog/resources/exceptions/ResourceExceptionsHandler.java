@@ -2,12 +2,13 @@ package br.com.joaosbarbosa.jbcatalog.resources.exceptions;
 
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.DataBaseException;
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.ResourceNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 
 @ControllerAdvice

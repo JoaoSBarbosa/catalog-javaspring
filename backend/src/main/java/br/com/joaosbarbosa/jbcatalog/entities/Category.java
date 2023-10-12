@@ -1,5 +1,6 @@
 package br.com.joaosbarbosa.jbcatalog.entities;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_category")
