@@ -1,11 +1,13 @@
 package br.com.joaosbarbosa.jbcatalog.entities;
 
-import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "tb_user")
@@ -18,6 +20,7 @@ public class User implements Serializable {
     private long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
 

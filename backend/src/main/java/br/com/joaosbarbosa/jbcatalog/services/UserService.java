@@ -2,25 +2,31 @@ package br.com.joaosbarbosa.jbcatalog.services;
 
 import br.com.joaosbarbosa.jbcatalog.dto.RoleDTO;
 import br.com.joaosbarbosa.jbcatalog.dto.UserDTO;
+import br.com.joaosbarbosa.jbcatalog.dto.UserInsertDTO;
 import br.com.joaosbarbosa.jbcatalog.entities.Role;
 import br.com.joaosbarbosa.jbcatalog.entities.User;
 import br.com.joaosbarbosa.jbcatalog.repositories.RoleRepository;
 import br.com.joaosbarbosa.jbcatalog.repositories.UserRepository;
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.DataBaseException;
 import br.com.joaosbarbosa.jbcatalog.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.TransactionScoped;
 import java.util.Optional;
 
 @Service
 public class UserService {
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     UserRepository repository;
@@ -43,14 +49,16 @@ public class UserService {
         return new UserDTO(entity);
     }
 
-    public UserDTO insert(UserDTO dto) {
+    @Transactional
+    public UserDTO insert(UserInsertDTO dto) {
         User entity = new User();
         copyDtoToEntity(entity, dto);
-
+        entity.setPassword(passwordEncoder.encode(dto.getPassword()));
         entity = repository.save(entity);
         return new UserDTO(entity);
     }
 
+    @Transactional
     public UserDTO update(UserDTO dto, long id) {
         try {
             User entity = repository.getOne(id);
@@ -63,6 +71,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public void delete(long id) {
         try {
             repository.deleteById(id);

@@ -1,7 +1,7 @@
 package br.com.joaosbarbosa.jbcatalog.entities;
 
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 

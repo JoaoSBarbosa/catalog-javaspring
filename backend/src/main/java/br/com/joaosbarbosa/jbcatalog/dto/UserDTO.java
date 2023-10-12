@@ -17,7 +17,7 @@ public class UserDTO implements Serializable {
     //Senha não adicionada porque não faz sentido transitá-la no DTO
 
 
-//    Para transitar no Json os dados do usauiros e suas permisões
+//    Para transitar no Json os dados do usuarios e suas permisões
     Set<RoleDTO> roles = new HashSet<>();
     public UserDTO() {
     }
