@@ -3,6 +3,7 @@ package br.com.joaosbarbosa.jbcatalog.services;
 import br.com.joaosbarbosa.jbcatalog.dto.RoleDTO;
 import br.com.joaosbarbosa.jbcatalog.dto.UserDTO;
 import br.com.joaosbarbosa.jbcatalog.dto.UserInsertDTO;
+import br.com.joaosbarbosa.jbcatalog.dto.UserUpdateDTO;
 import br.com.joaosbarbosa.jbcatalog.entities.Role;
 import br.com.joaosbarbosa.jbcatalog.entities.User;
 import br.com.joaosbarbosa.jbcatalog.repositories.RoleRepository;
@@ -60,7 +61,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(UserDTO dto, long id) {
+    public UserDTO update(UserUpdateDTO dto, long id) {
         try {
             User entity = repository.getOne(id);
             copyDtoToEntity(entity, dto);

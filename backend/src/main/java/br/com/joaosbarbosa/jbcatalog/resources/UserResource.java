@@ -3,6 +3,7 @@ package br.com.joaosbarbosa.jbcatalog.resources;
 
 import br.com.joaosbarbosa.jbcatalog.dto.UserDTO;
 import br.com.joaosbarbosa.jbcatalog.dto.UserInsertDTO;
+import br.com.joaosbarbosa.jbcatalog.dto.UserUpdateDTO;
 import br.com.joaosbarbosa.jbcatalog.entities.User;
 import br.com.joaosbarbosa.jbcatalog.services.UserService;
 import jakarta.validation.Valid;
@@ -42,9 +43,9 @@ public class UserResource {
    }
 
    @PutMapping(value = "/{id}")
-   public ResponseEntity<UserDTO> update(@Valid @RequestBody UserDTO dto, @PathVariable long id){
-        dto = service.update(dto, id);
-        return ResponseEntity.ok().body(dto);
+   public ResponseEntity<UserDTO> update(@Valid @RequestBody UserUpdateDTO dto, @PathVariable long id){
+        UserDTO updatDto = service.update(dto, id);
+        return ResponseEntity.ok().body(updatDto);
    }
 
    @DeleteMapping(value = "/{id}")
