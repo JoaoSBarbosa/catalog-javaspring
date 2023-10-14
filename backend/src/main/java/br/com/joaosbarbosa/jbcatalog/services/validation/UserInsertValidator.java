@@ -4,8 +4,8 @@ import br.com.joaosbarbosa.jbcatalog.dto.UserInsertDTO;
 import br.com.joaosbarbosa.jbcatalog.entities.User;
 import br.com.joaosbarbosa.jbcatalog.repositories.UserRepository;
 import br.com.joaosbarbosa.jbcatalog.resources.exceptions.FieldMessage;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

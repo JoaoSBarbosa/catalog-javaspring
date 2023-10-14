@@ -2,7 +2,7 @@ package br.com.joaosbarbosa.jbcatalog.resources;
 
 import br.com.joaosbarbosa.jbcatalog.dto.ProductDTO;
 import br.com.joaosbarbosa.jbcatalog.services.ProductService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

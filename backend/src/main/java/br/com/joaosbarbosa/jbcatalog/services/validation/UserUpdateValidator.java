@@ -5,9 +5,9 @@ import br.com.joaosbarbosa.jbcatalog.dto.UserUpdateDTO;
 import br.com.joaosbarbosa.jbcatalog.entities.User;
 import br.com.joaosbarbosa.jbcatalog.repositories.UserRepository;
 import br.com.joaosbarbosa.jbcatalog.resources.exceptions.FieldMessage;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
