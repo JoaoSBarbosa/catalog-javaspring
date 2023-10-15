@@ -1,6 +1,7 @@
 package br.com.joaosbarbosa.jbcatalog.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,13 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
+    @Value("${security.oauth2.client.client-id}")
+    private String clientId;
+    @Value("${security.oauth2.client.client-secret}")
+    private String clientSecret;
+    @Value("${jwt.duration}")
+    private Integer jwtDuration;
 
     @Autowired BCryptPasswordEncoder passwordEncoder;
     @Autowired JwtAccessTokenConverter accessTokenConverter;
@@ -31,11 +39,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("jbcatalog") // Nome da aplicação que solicitará acesso
-                .secret(passwordEncoder.encode("jbcatalog123")) // Senha para acessar a aplicação
+                .withClient(clientId) // Nome da aplicação que solicitará acesso
+                .secret(passwordEncoder.encode(clientSecret)) // Senha para acessar a aplicação
                 .scopes("read", "write") // Escopos de acesso (leitura, escrita, etc.)
                 .authorizedGrantTypes("password") // Padrão de concessão de token
-                .accessTokenValiditySeconds(86400); // Tempo de validade do token (24 horas)
+                .accessTokenValiditySeconds(jwtDuration); // Tempo de validade do token (24 horas)
     }
 
     // Configura os endpoints para autenticação e o formato do token
