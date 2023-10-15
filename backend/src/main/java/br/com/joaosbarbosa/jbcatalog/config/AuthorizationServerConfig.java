@@ -1,5 +1,6 @@
 package br.com.joaosbarbosa.jbcatalog.config;
 
+import br.com.joaosbarbosa.jbcatalog.components.JwtTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +11,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableAuthorizationServer
@@ -29,6 +34,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired JwtTokenStore tokenStore;
     @Autowired AuthenticationManager authenticationManager;
 
+    @Autowired private JwtTokenEnhancer tokenEnhancer;
     // Configura as permissões de acesso aos endpoints de geração e validação de tokens
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -49,8 +55,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     // Configura os endpoints para autenticação e o formato do token
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
+        TokenEnhancerChain chain = new TokenEnhancerChain();
+        chain.setTokenEnhancers(Arrays.asList(accessTokenConverter,tokenEnhancer));
+
         endpoints.authenticationManager(authenticationManager) // Gerenciador de autenticação
                 .tokenStore(tokenStore) // Armazenamento do token
-                .accessTokenConverter(accessTokenConverter); // Conversor de token
+                .accessTokenConverter(accessTokenConverter) // Conversor de token
+                .tokenEnhancer(chain);
     }
 }
