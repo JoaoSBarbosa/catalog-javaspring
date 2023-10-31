@@ -1,4 +1,5 @@
-![GitHub top language](https://img.shields.io/github/languages/top/JoaoSBarbosa/catalog-javaspring)
+![GitHub top language](https://img.shields.io/github/languages/top/JoaoSBarbosa/catalog-javaspring) ![GitHub language count](https://img.shields.io/github/languages/count/JoaoSBarbosa/catalog-javaspring)
+
 
 # JBCatalog - Catalogo de loja em Java ☕
 
