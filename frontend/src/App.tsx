@@ -1,7 +1,8 @@
+import "./assets/styles/custom.scss";
 import "./App.css";
 
 function App() {
-  return <h1 className="btn btn-primary">Welcome by Wolf Catlog</h1>;
+  return <h1 className="">Welcome by Wolf Catalog</h1>;
 }
 
 export default App;
