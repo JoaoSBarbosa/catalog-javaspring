@@ -1,0 +1,11 @@
+.nav-logo {
+  color: #fff;
+}
+
+.nav-logo:hover {
+  /* color: aqua; */
+}
+.nav-logo-img {
+  height: 60px;
+  width: 60px;
+}
