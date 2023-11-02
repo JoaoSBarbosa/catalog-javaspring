@@ -1,5 +1,8 @@
+a {
+  display: block;
+}
 .nav-main {
-  height: 5rem;
+  min-height: 5rem;
   padding-left: 2.5rem;
 }
 .nav-logo {
@@ -10,8 +13,7 @@
   /* color: aqua; */
 }
 .nav-logo-img {
-  height: 60px;
-  /* width: 60px; */
+  height: 70px;
 }
 .nav-container-menu {
   display: flex;
@@ -19,10 +21,16 @@
   width: 23.75rem;
   justify-content: space-between;
 }
-
+.nav-container-menu li {
+  /* border: 1px solid green; */
+  width: max-content;
+  height: max-content;
+}
 .nav-container-menu a {
   color: rgba(255, 255, 255, 0.5);
   position: relative;
+  /* width: max-content; */
+  /* border: 1px solid red; */
 }
 
 .nav-container-menu a::after {
