@@ -2,7 +2,7 @@ import "./styles.css";
 
 export const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-md  bg-primary">
+    <nav className="navbar navbar-expand-md  bg-primary nav-main">
       <div className="container-fluid">
         <a href="/" className="nav-logo">
           <img
@@ -15,10 +15,12 @@ export const NavBar = () => {
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav offset-md-2 nav-container-menu">
             <li>
-              <a href="">HOME</a>
+              <a href="/" className="active">
+                HOME
+              </a>
             </li>
             <li>
-              <a href="">CATÁLOGO</a>
+              <a href="/">CATÁLOGO</a>
             </li>
             <li>
               <a href="">ADMIN</a>
