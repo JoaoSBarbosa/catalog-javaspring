@@ -1,0 +1,21 @@
+.nav-logo {
+  color: #fff;
+}
+
+.nav-logo:hover {
+  /* color: aqua; */
+}
+.nav-logo-img {
+  height: 80px;
+  /* width: 60px; */
+}
+.nav-container-menu {
+  display: flex;
+  font-size: 1.125rem;
+  width: 23.75rem;
+  justify-content: space-between;
+}
+
+.nav-container-menu a {
+  color: rgba(255, 255, 255, 0.5);
+}
