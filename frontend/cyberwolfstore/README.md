@@ -1,46 +1,33 @@
-# Getting Started with Create React App
+![GitHub top language](https://img.shields.io/github/languages/top/JoaoSBarbosa/catalog-javaspring) ![GitHub language count](https://img.shields.io/github/languages/count/JoaoSBarbosa/catalog-javaspring)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# CyberWolf Store Frontend - Catálogo de Loja em React ⚛️[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/) 
 
-## Available Scripts
+## Sobre o Projeto
 
-In the project directory, you can run:
+O CyberWolf Store é a interface de usuário para o sistema de catálogo de produtos desenvolvido em Java com Spring Boot. Este projeto utiliza React para construir a interface e se comunica com o backend através de requisições HTTP.
 
-### `yarn start`
+## Tecnologias Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [React](https://reactjs.org/) [![React](https://img.shields.io/badge/React-1E90FF?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [React Router](https://reactrouter.com/) [![React Router](https://img.shields.io/badge/React%20Router-008080?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com/) 
 
-### `yarn test`
+- [Tailwind CSS](https://tailwindcss.com/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/) 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [React Hooks](https://reactjs.org/docs/hooks-state.html) [![useState e useEffect (React Hooks)](https://img.shields.io/badge/useState%20e%20useEffect%20-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/docs/hooks-state.html)
 
-### `yarn build`
+  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Como Executar o Projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone o repositório do GitHub para sua máquina local.
+2. Navegue até o diretório do projeto.
+3. Instale as dependências utilizando o comando `npm install`.
+4. Inicie a aplicação com `npm start`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Configuração da Conexão com o Backend
 
-### `yarn eject`
+Para conectar o frontend ao backend, certifique-se de que o backend esteja em execução na porta padrão (normalmente `localhost:8080`). Caso o backend esteja em uma porta diferente, você pode configurar a URL no arquivo `src/api.js`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+const BASE_URL = "http://localhost:8080";

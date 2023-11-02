@@ -1,10 +1,10 @@
 export const NavBar = () => {
   return (
-    <nav className="bg-indigo-800 p-3 text-white">
+    <nav className="bg-blue-900 p-3 text-white">
       <div className="nav-conten flex items-center justify-between">
         <a href="/" className="nav-logo flex items-center flex-col">
           <img src="logo2.png" alt="" className="h-14" />
-          <h4 className="text-white">CyberWolf Store</h4>
+          <h4>CyberWolf Store</h4>
         </a>
 
         {/* essa div no meio */}

@@ -7,6 +7,7 @@ function App() {
       <header>
         <NavBar />
       </header>
+      <main className="bg-blue-600">teste</main>
     </>
   );
 }
