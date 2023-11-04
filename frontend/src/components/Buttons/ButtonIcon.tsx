@@ -5,7 +5,7 @@ type btnProps = {
 export const ButtonIcon = ({ value }: btnProps) => {
   return (
     <button className="btn btn-primary btn-icon">
-      <p>{value}</p>
+      <span>{value}</span>
     </button>
   );
 };
