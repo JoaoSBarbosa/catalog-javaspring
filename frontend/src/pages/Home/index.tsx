@@ -19,7 +19,7 @@ export const Home = () => {
               estilo de vida digital.
             </p>
 
-            <ButtonIcon value="Explorar Catálogo" />
+            <ButtonIcon value="Explorar Catálogo"/>
           </div>
 
           <div className="home-image-container">
