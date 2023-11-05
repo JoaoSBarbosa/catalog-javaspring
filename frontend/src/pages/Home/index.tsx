@@ -16,9 +16,11 @@ export const Home = () => {
               soluções para atender a todas as suas necessidades tecnológicas.
             </p>
           </div>
-          <Link to="/products">
-            <ButtonIcon value="Explorar Catálogo" />
-          </Link>
+          <div>
+            <Link to="/products">
+              <ButtonIcon value="Explorar Catálogo" />
+            </Link>
+          </div>
         </div>
 
         <div className="home-image-container">
