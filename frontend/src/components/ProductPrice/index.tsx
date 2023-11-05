@@ -1,8 +1,8 @@
 import "./styles.css";
 type propsPrice = {
-  price?: string;
+  price?: number;
 };
-export const ProductPrice = ({ price = "2.779,00" }: propsPrice) => {
+export const ProductPrice = ({ price = 0.00 }: propsPrice) => {
   return (
     <div className="product-price-container">
       <span>R$</span>
