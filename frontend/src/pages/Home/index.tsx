@@ -7,7 +7,7 @@ export const Home = () => {
     <>
       <NavBar />
       <section className="home-container ">
-        <div className="home-card">
+        <div className="base-card home-card">
           <div className="home-content-container">
             <div>
               <h1>Explore nossa gama de Produtos Tecnológicos</h1>
