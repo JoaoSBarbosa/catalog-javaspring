@@ -1,14 +1,3 @@
-// import { BrowserRouter, Switch,Route } from "react-router-dom";
-
-// export const Routes = () => (
-//   <BrowserRouter>
-//     <Switch>
-//       <Route path="/">
-
-//       </Route>
-//     </Switch>
-//   </BrowserRouter>
-// );
 
 import {NavBar} from "components/Navbar";
 import {Admin} from "pages/Admin";
