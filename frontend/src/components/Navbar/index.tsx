@@ -1,14 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import "./styles.css";
 import "bootstrap/js/src/collapse.js";
-
+import logo from "assets/images/logo-cyber2.png";
 export const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-primary nav-main">
       <div className="container-fluid">
         <Link to="/" className="nav-logo">
           <img
-            src="logo-cyber2.png"
+            src={logo}
             alt="Cyberwolf store"
             className="nav-logo-img"
           />
