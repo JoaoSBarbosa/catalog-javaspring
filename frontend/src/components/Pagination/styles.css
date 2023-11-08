@@ -1,0 +1,17 @@
+.pagination-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pagination-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #407bff;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #e1e1e1;
+    cursor: pointer;
+}
