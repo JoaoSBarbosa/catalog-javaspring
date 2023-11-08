@@ -30,13 +30,7 @@ export const ProductDetails = () => {
                             <h2>Descrição do produto</h2>
                             <p>Apresentamos a mais recente inovação em entretenimento doméstico: a TV Ultra HD. Com uma
                                 resolução deslumbrante e cores vivas, esta TV redefine a forma como você experimenta
-                                seus filmes, programas de TV e jogos favoritos. Sua tecnologia avançada proporciona
-                                detalhes nítidos e uma profundidade de contraste impressionante, proporcionando uma
-                                visão mais realista do que nunca. Com opções de conectividade de última geração, você
-                                pode transmitir conteúdo, acessar aplicativos e até mesmo espelhar seus dispositivos
-                                para uma experiência verdadeiramente integrada. Eleve o nível da sua experiência de
-                                entretenimento com a nova TV Ultra HD e mergulhe em um mundo de imagens deslumbrantes e
-                                som imersivo</p>
+                                seus filmes, programas de TV e jogos favoritos.</p>
                         </div>
                     </div>
                 </div>
