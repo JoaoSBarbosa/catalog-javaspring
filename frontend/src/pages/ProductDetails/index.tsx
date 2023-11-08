@@ -5,8 +5,8 @@ import {ProductPrice} from "../../components/ProductPrice";
 export const ProductDetails = () => {
     return (
         <div className={"product-details-container"}>
-            <h1>Produto detalhado</h1>
-            <div className={"product-details-card"}>
+            {/*<h1>Produto detalhado</h1>*/}
+            <div className={"product-details-card base-card"}>
                 <div className={"product-details-go-back"}>
                     <ArrowIcon/><h2>voltar</h2>
                 </div>

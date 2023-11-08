@@ -1,5 +1,5 @@
 import "./styles.css";
-import { ReactComponent as ImageSeta } from "assets/images/Seta.svg";
+import { ReactComponent as ImageSet } from "assets/images/Seta.svg";
 type btnProps = {
   value: string;
 };
@@ -11,7 +11,7 @@ export const ButtonIcon = ({ value }: btnProps) => {
       </button>
 
       <div className="btn-seta">
-        <ImageSeta />
+        <ImageSet />
       </div>
     </div>
   );
