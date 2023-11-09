@@ -7,9 +7,9 @@ export const Admin = () => {
     return (
         <div className={"admin-container"}>
             <Navbar/>
-            <div className="admin-content"></div>
+            <div className="admin-content">conteudo</div>
 
-            <Pagination/>
+            
         </div>
     );
 };

@@ -1,0 +1,19 @@
+.admin-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-content {
+    border: 1px solid red;
+    padding: 20px;
+}
+@media(min-width:1200px){
+    .admin-container {
+
+        flex-direction: row;
+    }
+    .admin-content {
+        flex: 1;
+    }
+
+}
