@@ -9,7 +9,7 @@ export const Admin = () => {
             <Navbar/>
             <div className="admin-content">conteudo</div>
 
-            
+
         </div>
     );
 };
