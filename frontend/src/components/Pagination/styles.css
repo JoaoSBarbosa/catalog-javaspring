@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    margin-top: 20px;
 }
 
 .pagination-item {
@@ -25,13 +26,16 @@
 .pagination-item.active {
     background-color: #407bff;
 }
+.arrow-previous,
+.arrow-next{
+    cursor: pointer;
+}
 .arrow-previous{
     transform: rotate(-180deg);
     margin-right: 10px;
 }
 .arrow-next{
     margin-left: 10px;
-
 }
 
 .arrow-active {

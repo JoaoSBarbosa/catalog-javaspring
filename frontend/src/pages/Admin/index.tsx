@@ -1,10 +1,15 @@
-import { NavBar } from "components/Navbar";
+import {NavBar} from "components/Navbar";
 import "./styles.css";
+import {Pagination} from "../../components/Pagination";
+import {Navbar} from "./Navbar";
 
 export const Admin = () => {
-  return (
-    <div>
-      <h1>Página de admin</h1>
-    </div>
-  );
+    return (
+        <div className={"admin-container"}>
+            <Navbar/>
+            <div className="admin-content"></div>
+
+            <Pagination/>
+        </div>
+    );
 };
