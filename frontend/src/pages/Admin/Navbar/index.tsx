@@ -6,19 +6,19 @@ export const Navbar = () => {
         <nav className={"admin-nav-container"}>
             <ul className={"admin-nav-content"}>
                 <li>
-                    <a href="/" className={"admin-nav-item active"}>
+                    <NavLink to="/admin/products" activeClassName="active" className={"admin-nav-item"}>
                         Produtos
-                    </a>
+                    </NavLink>
                 </li>
                 <li>
-                    <a href="/" className={"admin-nav-item"}>
+                    <NavLink to="/admin/categories" activeClassName="active" className={"admin-nav-item"}>
                         Categorias
-                    </a>
+                    </NavLink>
                 </li>
                 <li>
-                    <a href="/" className={"admin-nav-item"}>
+                    <NavLink to="/admin/users" activeClassName="active" className={"admin-nav-item"}>
                         Usuários
-                    </a>
+                    </NavLink>
                 </li>
             </ul>
         </nav>
