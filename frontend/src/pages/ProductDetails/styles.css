@@ -126,10 +126,10 @@
 @media(min-width: 1400px){
     .product-image-container img{
         width: auto;
-        height: 480px;
+        height: 440px;
     }
     .product-description-container{
-        min-height: 554px;
+        min-height: 514px;
     }
 
 

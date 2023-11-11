@@ -1,12 +1,34 @@
 import "./styles.css";
 import {ReactComponent as ArrowIcon} from "assets/images/Seta.svg";
 import {ProductPrice} from "../../components/ProductPrice";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import {Product} from "../../types/Product";
+import axios from "axios";
+import {BASE_URL} from "../../util/request";
+import {useEffect, useState} from "react";
 
+type UrlParams ={
+    productId:string;
+}
 export const ProductDetails = () => {
+
+    const {productId} = useParams<UrlParams>()
+    const [product, setProduct] = useState<Product>();
+
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/produtos/${productId}`)
+            .then((response) => {
+                setProduct(response.data);
+            })
+            .catch((error) => {
+                console.error('Error making request:', error);
+            });
+    }, [productId]);
+
+
     return (
         <div className={"product-details-container"}>
-            {/*<h1>Produto detalhado</h1>*/}
             <div className={"product-details-card base-card"}>
                 <Link to={"/products"}>
                     <div className={"product-details-go-back"}>
@@ -18,12 +40,13 @@ export const ProductDetails = () => {
 
                         <div className={"product-image-container"}>
                             <img
-                                src="https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg"
-                                alt=""/>
+                                src={product?.imgUrl}
+                                // src="https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg"
+                                alt={product?.name}/>
                         </div>
                         <div className={"product-name-price-container"}>
-                            <h1>TV LED 55 Polegadas</h1>
-                            <ProductPrice price={3500}/>
+                            <h1>{product?.name}</h1>
+                            {product && <ProductPrice price={product?.price}/>}
                         </div>
 
                     </div>
@@ -31,9 +54,7 @@ export const ProductDetails = () => {
                     <div className={"col-xl-6"}>
                         <div className={"product-description-container"}>
                             <h2>Descrição do produto</h2>
-                            <p>Apresentamos a mais recente inovação em entretenimento doméstico: a TV Ultra HD. Com uma
-                                resolução deslumbrante e cores vivas, esta TV redefine a forma como você experimenta
-                                seus filmes, programas de TV e jogos favoritos.</p>
+                            <p>{product?.description}</p>
                         </div>
                     </div>
                 </div>

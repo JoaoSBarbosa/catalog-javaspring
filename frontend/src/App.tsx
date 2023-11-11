@@ -9,8 +9,6 @@ import { Routes } from "Routes";
 function App() {
   return (
     <>
-      {/* <Home /> */}
-      {/* <Catalog /> */}
       <Routes />
     </>
   );
