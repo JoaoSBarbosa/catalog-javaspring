@@ -1,15 +1,19 @@
 import {ReactComponent as AuthImage} from "assets/images/login.svg";
 import {Route, Switch} from "react-router-dom";
-
 import "./styles.css";
+
 export const Auth = () => {
     return (
         <div className={"auth-container"}>
 
             <div className={"auth-banner-container"}>
-                <h1>Divulgue seus produtos ns Cyber Wolf 🐺</h1>
-                <p>Faça parte do nosso catálogo de divulgação e aumente a venda dos seus produtos</p>
-                <AuthImage/>
+                <h1>Promova seus produtos com destaque no Cyber Wolf🐺
+
+                </h1>
+                <p>Junte-se ao nosso catálogo exclusivo de divulgação e potencialize as vendas dos seus produtos. Alcance novos clientes e destaque-se no mercado. Não perca a oportunidade de fazer parte do sucesso no Cyber Wolf! 🚀</p>
+                <div className={"auth-image-container"}>
+                    <AuthImage/>
+                </div>
             </div>
 
             <div className={"auth-form-container"}>
