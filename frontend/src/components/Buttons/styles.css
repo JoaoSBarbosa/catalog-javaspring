@@ -7,6 +7,7 @@
 }
 .btn-container button {
   border-radius: 10px 0 0 10px;
+  width: calc(100% - 50px);
 }
 .btn-seta {
   display: flex;
@@ -25,6 +26,9 @@
   .btn-seta {
     height: 70px;
     width: 70px;
+  }
+  .btn-container button {
+    width: calc(100% - 70px);
   }
   .btn h6 {
     font-size: 18px;

@@ -1,7 +1,7 @@
 .auth-container {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 20px;
 }
 
 .auth-banner-container {
