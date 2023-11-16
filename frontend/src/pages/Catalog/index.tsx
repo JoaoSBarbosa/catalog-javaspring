@@ -6,11 +6,10 @@ import {BASE_URL} from "../../util/request";
 // ---- TIPOS ----
 import {Product} from "../../types/Product";
 import {SpringPage} from "../../types/vendor/SpringPage";
-import {AxiosParams} from "../../types/vendor/AxiosParams";
 // ---- IMPORT SISTEMA ----
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import axios from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 
 // ---- Styles ----
 import CatalogMagic from "./loader"; // Importa o componente de loader
@@ -21,9 +20,10 @@ export const Catalog = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const params: AxiosParams = {
+        const params: AxiosRequestConfig = {
             method: "GET",
-            url: `${BASE_URL}/produtos`,
+            url: `/produtos`,
+            baseURL:BASE_URL,
             params: {
                 page: 0,
                 size: 12
