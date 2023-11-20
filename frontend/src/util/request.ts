@@ -12,7 +12,7 @@ type LoginData = {
     password: string
 }
 
-type LoginResponse ={
+type LoginResponse = {
     access_token: string;
     token_type: string,
     expires_in: number,
@@ -36,20 +36,22 @@ export const handleRequestLogin = (loginData: LoginData) => {
     return axios({method: 'POST', baseURL: BASE_URL, url: '/oauth/token', data, headers})
 
 }
-export const saveAuthDataToLocalStorage =(objAuth: LoginResponse)=>{
+export const saveAuthDataToLocalStorage = (objAuth: LoginResponse) => {
     localStorage.setItem(TOKEN_KEY, JSON.stringify(objAuth));
 }
 
-export const getAuthDataToLocalStorage =()=>{
+export const getAuthDataToLocalStorage = () => {
     const storageItemString = localStorage.getItem(TOKEN_KEY) ?? "{}";
     return JSON.parse(storageItemString) as LoginResponse;
 }
 
 export const handleRequestBackend = (config: AxiosRequestConfig) => {
 
-    const headers = config.withCredentials ? {
-        Authorization: "Bearer "
-    } : {}
+    const headers = config.withCredentials
+        ? {
+            ...config.headers, Authorization: "Bearer " + getAuthDataToLocalStorage().access_token
+        }
+        : config.headers
 
     return axios({...config, baseURL: BASE_URL, headers});
 }
