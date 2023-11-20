@@ -40,7 +40,11 @@ export const Login = () => {
                 <div className="mb-4">
                     <input
                         {...register("username", {
-                            required: 'O campo email é obrigatório'
+                            required: 'O campo email é obrigatório',
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Email inválido"
+                            }
                         })}
                         type="text"
                         className="form-control base-input"
