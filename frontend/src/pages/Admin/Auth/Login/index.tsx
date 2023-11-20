@@ -38,6 +38,7 @@ export const Login = () => {
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
+
                     <input
                         {...register("username", {
                             required: 'O campo email é obrigatório',
@@ -47,7 +48,7 @@ export const Login = () => {
                             }
                         })}
                         type="text"
-                        className="form-control base-input"
+                        className={`form-control base-input ${errors.username ? 'is-invalid':'is-valid'}`}
                         placeholder="Email"
                         name="username"
                     />
@@ -57,12 +58,13 @@ export const Login = () => {
 
                 </div>
                 <div className="mb-2">
+
                     <input
                         {...register("password", {
                             required: 'O campo password é obrigatório'
                         })}
                         type="password"
-                        className="form-control base-input "
+                        className={`form-control base-input ${errors.password ? 'is-invalid':'is-valid'}`}
                         placeholder="Password"
                         name="password"
                     />
