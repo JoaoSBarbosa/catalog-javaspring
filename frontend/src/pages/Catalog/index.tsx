@@ -1,7 +1,7 @@
 // ---- COMPONENTES ----
 import {ProductCard} from "components/ProductCard";
 import {Pagination} from "../../components/Pagination";
-import {BASE_URL} from "../../util/request";
+import {handleRequestBackend} from "../../util/request";
 
 // ---- TIPOS ----
 import {Product} from "../../types/Product";
@@ -9,7 +9,7 @@ import {SpringPage} from "../../types/vendor/SpringPage";
 // ---- IMPORT SISTEMA ----
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import axios, {AxiosRequestConfig} from "axios";
+import {AxiosRequestConfig} from "axios";
 
 // ---- Styles ----
 import CatalogMagic from "./loader"; // Importa o componente de loader
@@ -23,14 +23,13 @@ export const Catalog = () => {
         const params: AxiosRequestConfig = {
             method: "GET",
             url: `/produtos`,
-            baseURL:BASE_URL,
             params: {
                 page: 0,
                 size: 12
             },
         };
 
-        axios(params)
+        handleRequestBackend(params)
             .then(response => {
                 setPage(response.data);
             })

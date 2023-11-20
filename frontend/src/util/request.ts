@@ -1,6 +1,6 @@
 import process from "process";
 import qs from 'qs';
-import axios from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'jbcatalog';
@@ -25,3 +25,11 @@ export const handleRequestLogin=(loginData:LoginData)=>{
     return axios({method:'POST',baseURL:BASE_URL,url:'/oauth/token',data,headers})
 
 }
+
+export const handleRequestBackend=(config:AxiosRequestConfig)=>{
+    return axios({...config, baseURL:BASE_URL});
+}
+
+// export const saveAuthData =(obj)=>{
+//     localStorage.setItem(tokenKey,)
+// }

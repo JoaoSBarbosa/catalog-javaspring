@@ -4,6 +4,7 @@ import {Pagination} from "../../components/Pagination";
 import {Navbar} from "./Navbar";
 import {Route, Switch} from "react-router-dom";
 import {Products} from "./pages/Products";
+import {Users} from "./User";
 
 export const Admin = () => {
     return (
@@ -18,7 +19,7 @@ export const Admin = () => {
                         <h1>Categorias CRUD</h1>
                     </Route>
                     <Route path={"/admin/users"}>
-                        <h1>Usuários CRUD</h1>
+                        <Users/>
                     </Route>
                 </Switch>
             </div>
