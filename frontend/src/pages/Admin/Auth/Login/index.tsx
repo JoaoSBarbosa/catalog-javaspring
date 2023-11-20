@@ -3,6 +3,7 @@ import {ButtonIcon} from "../../../../components/Buttons/ButtonIcon";
 import React from "react";
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import {handleRequestLogin} from "../../../../util/request";
 
 
 type FormData = {
@@ -14,8 +15,15 @@ export const Login = () => {
     const {register, handleSubmit} = useForm<FormData>()
 
     const onSubmit = (formData: FormData) => {
-        console.log(formData);
+        handleRequestLogin(formData)
+            .then(response =>{
+                console.log("Sucesso",response)
+            })
+            .catch(error =>{
+                console.log("Deu erro",error)
+            });
     }
+
     return (
         <div className="base-card login-card">
             <h1>LOGIN</h1>
