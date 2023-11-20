@@ -3,7 +3,7 @@ import {ButtonIcon} from "../../../../components/Buttons/ButtonIcon";
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {handleRequestLogin} from "../../../../util/request";
+import {getAuthDataToLocalStorage, handleRequestLogin, saveAuthDataToLocalStorage} from "../../../../util/request";
 
 
 type FormData = {
@@ -19,7 +19,9 @@ export const Login = () => {
         handleRequestLogin(formData)
             .then(response => {
                 console.log("Sucesso", response)
+                saveAuthDataToLocalStorage(response.data)
                 setHasError(false)
+                console.log(getAuthDataToLocalStorage());
             })
             .catch(error => {
                 console.log("Deu erro", error)

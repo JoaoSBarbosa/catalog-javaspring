@@ -6,10 +6,20 @@ export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'jbcatalog';
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'jbcatalog123';
-
+const TOKEN_KEY = 'authData';
 type LoginData = {
     username: string;
     password: string
+}
+
+type LoginResponse ={
+    access_token: string;
+    token_type: string,
+    expires_in: number,
+    scope: string,
+    userLastName: string,
+    userFirstName: string,
+    userId: number
 }
 
 export const handleRequestLogin = (loginData: LoginData) => {
@@ -26,6 +36,14 @@ export const handleRequestLogin = (loginData: LoginData) => {
     return axios({method: 'POST', baseURL: BASE_URL, url: '/oauth/token', data, headers})
 
 }
+export const saveAuthDataToLocalStorage =(objAuth: LoginResponse)=>{
+    localStorage.setItem(TOKEN_KEY, JSON.stringify(objAuth));
+}
+
+export const getAuthDataToLocalStorage =()=>{
+    const storageItemString = localStorage.getItem(TOKEN_KEY) ?? "{}";
+    return JSON.parse(storageItemString) as LoginResponse;
+}
 
 export const handleRequestBackend = (config: AxiosRequestConfig) => {
 
@@ -36,6 +54,3 @@ export const handleRequestBackend = (config: AxiosRequestConfig) => {
     return axios({...config, baseURL: BASE_URL, headers});
 }
 
-// export const saveAuthData =(obj)=>{
-//     localStorage.setItem(tokenKey,)
-// }
