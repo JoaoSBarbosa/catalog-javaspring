@@ -1,7 +1,7 @@
 import "./styles.css";
 import {ButtonIcon} from "../../../../components/Buttons/ButtonIcon";
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {getAuthDataToLocalStorage, handleRequestLogin, saveAuthDataToLocalStorage} from "../../../../util/request";
 
@@ -15,6 +15,7 @@ export const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>()
 
     const [hasError, setHasError] = useState<boolean>(false)
+    const history = useHistory();
     const onSubmit = (formData: FormData) => {
         handleRequestLogin(formData)
             .then(response => {
@@ -22,6 +23,7 @@ export const Login = () => {
                 saveAuthDataToLocalStorage(response.data)
                 setHasError(false)
                 console.log(getAuthDataToLocalStorage());
+                history.push('/admin')
             })
             .catch(error => {
                 console.log("Deu erro", error)
@@ -50,7 +52,7 @@ export const Login = () => {
                             }
                         })}
                         type="text"
-                        className={`form-control base-input ${errors.username ? 'is-invalid':'is-valid'}`}
+                        className={`form-control base-input ${errors.username ? 'is-invalid':''}`}
                         placeholder="Email"
                         name="username"
                     />
@@ -66,7 +68,7 @@ export const Login = () => {
                             required: 'O campo password é obrigatório'
                         })}
                         type="password"
-                        className={`form-control base-input ${errors.password ? 'is-invalid':'is-valid'}`}
+                        className={`form-control base-input ${errors.password ? 'is-invalid':''}`}
                         placeholder="Password"
                         name="password"
                     />
