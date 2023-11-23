@@ -2,6 +2,8 @@ import process from "process";
 import qs from 'qs';
 import axios, {AxiosRequestConfig} from "axios";
 import history from "./history";
+import {jwtDecode} from "jwt-decode";
+
 export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'jbcatalog';
@@ -11,7 +13,13 @@ type LoginData = {
     username: string;
     password: string
 }
+type Role = "ROLE_OPERATOR" | "ROLE_ADMIN";
 
+type TokenData = {
+    exp: number,
+    user_name: string,
+    authorities: Role[]
+}
 type LoginResponse = {
     access_token: string;
     token_type: string,
@@ -56,6 +64,7 @@ export const handleRequestBackend = (config: AxiosRequestConfig) => {
     return axios({...config, baseURL: BASE_URL, headers});
 }
 
+
 // interceptor para antes da requisição
 axios.interceptors.request.use(function (config) {
     return config;
@@ -67,8 +76,16 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
-    if(error.response.status === 401 || error.response.status === 403){
+    if (error.response.status === 401 || error.response.status === 403) {
         history.push("/admin/auth")
     }
     return Promise.reject(error);
 });
+
+export const getTokenData = (): TokenData | undefined => {
+    try {
+        return jwtDecode(getAuthDataToLocalStorage().access_token) as TokenData;
+    } catch (error) {
+        return undefined
+    }
+}
