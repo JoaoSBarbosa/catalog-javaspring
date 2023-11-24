@@ -15,7 +15,7 @@ type LoginData = {
 }
 type Role = "ROLE_OPERATOR" | "ROLE_ADMIN";
 
-type TokenData = {
+export type TokenData = {
     exp: number,
     user_name: string,
     authorities: Role[]
@@ -52,7 +52,9 @@ export const getAuthDataToLocalStorage = () => {
     const storageItemString = localStorage.getItem(TOKEN_KEY) ?? "{}";
     return JSON.parse(storageItemString) as LoginResponse;
 }
-
+export const removeAuthDataToLocalStorage=()=>{
+    localStorage.removeItem(TOKEN_KEY)
+}
 export const handleRequestBackend = (config: AxiosRequestConfig) => {
 
     const headers = config.withCredentials
