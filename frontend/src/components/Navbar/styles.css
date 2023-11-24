@@ -52,3 +52,28 @@ a {
 .nav-container-menu a.active::after {
   width: 100%;
 }
+.content-username-login-logout{
+  display: flex;
+  gap: 20px;
+}
+.container-login-logout,
+.nav-username{
+  display: none;
+}
+@media(min-width:768px){
+  .container-login-logout{
+    color: #fff;
+    margin-right: 13px;
+    display: unset;
+  }
+
+}
+@media(min-width:992px){
+  .container-login-logout{
+
+    margin-right: 40px;
+
+  }
+  .nav-username{
+    display: unset;
+  }}

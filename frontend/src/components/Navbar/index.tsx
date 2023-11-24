@@ -91,10 +91,10 @@ export const NavBar = () => {
                     </ul>
                 </div>
 
-                <div>
+                <div className={"container-login-logout"}>
                     {authData.authenticated ? (
-                        <div style={{display:"flex",gap:"10px"}}>
-                            <span>{authData.tokenData?.user_name}</span>
+                        <div className={"content-username-login-logout"}>
+                            <span className={"nav-username"}>{authData.tokenData?.user_name}</span>
                             <a href="#logout" onClick={handleLogoutAfterClick}>SAIR</a>
                         </div>
 
