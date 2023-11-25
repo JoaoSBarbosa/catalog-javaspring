@@ -52,7 +52,7 @@ export const getAuthDataToLocalStorage = () => {
     const storageItemString = localStorage.getItem(TOKEN_KEY) ?? "{}";
     return JSON.parse(storageItemString) as LoginResponse;
 }
-export const removeAuthDataToLocalStorage=()=>{
+export const removeAuthDataToLocalStorage = () => {
     localStorage.removeItem(TOKEN_KEY)
 }
 export const handleRequestBackend = (config: AxiosRequestConfig) => {
@@ -97,4 +97,15 @@ export const isAuthenticated = (): boolean => {
 
     return (tokenData && tokenData.exp * 1000 > Date.now()) ? true : false;
 
+}
+
+export const hasAnyRoles = (roles: Role[]): boolean => {
+    if (roles.length === 0) {
+        return true
+    }
+    const tokenData = getTokenData();
+    if (tokenData !== undefined) {
+        return roles.some(role => tokenData.authorities.includes(role));
+    }
+    return false;
 }

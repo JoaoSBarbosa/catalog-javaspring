@@ -6,7 +6,7 @@ import {getTokenData, isAuthenticated, removeAuthDataToLocalStorage} from "../..
 import {useContext, useEffect} from "react";
 import history from "../../util/history";
 import {AuthContext} from "../../AuthContext";
-import {SignOut} from "@phosphor-icons/react";
+import {Crown, SignOut} from "@phosphor-icons/react";
 
 export const NavBar = () => {
 
@@ -93,12 +93,17 @@ export const NavBar = () => {
                 <div className={"container-login-logout"}>
                     {authContextData.authenticated ? (
                         <div className={"content-username-login-logout"}>
-                            <span className={"nav-username"}>{authContextData.tokenData?.user_name}</span>
+                            <span className={"nav-username"}>
+                                {authContextData.tokenData?.user_name}
+                                {authContextData.tokenData?.authorities.includes('ROLE_ADMIN') ?
+                                    <Crown size={24} color="#FFD700" weight="thin" />:""}
+
+                            </span>
                             <a href="#logout" onClick={handleLogoutAfterClick} className={"nav-link"}>
                                 SAIR
                                 <SignOut
                                     className={"nav-link-icon"}
-                                    size={30}
+                                    size={24}
                                     color="#f5f5f5"
                                     weight="regular" />
                             </a>

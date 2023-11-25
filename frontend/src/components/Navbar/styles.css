@@ -84,5 +84,7 @@ a {
 
   }
   .nav-username{
-    display: unset;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }}
