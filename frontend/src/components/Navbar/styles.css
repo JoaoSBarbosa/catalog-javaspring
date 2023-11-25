@@ -54,11 +54,20 @@ a {
 }
 .content-username-login-logout{
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 .container-login-logout,
 .nav-username{
   display: none;
+}
+.nav-link{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-link:hover .nav-link-icon{
+  fill: coral;
 }
 @media(min-width:768px){
   .container-login-logout{

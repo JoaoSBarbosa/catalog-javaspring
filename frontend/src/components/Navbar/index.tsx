@@ -2,41 +2,40 @@ import {Link, NavLink} from "react-router-dom";
 import "./styles.css";
 import "bootstrap/js/src/collapse.js";
 import logo from "assets/images/logo-cyber2.png";
-import {getTokenData, isAuthenticated, removeAuthDataToLocalStorage, TokenData} from "../../util/request";
-import {useEffect, useState} from "react";
+import {getTokenData, isAuthenticated, removeAuthDataToLocalStorage} from "../../util/request";
+import {useContext, useEffect} from "react";
 import history from "../../util/history";
-
+import {AuthContext} from "../../AuthContext";
+import {SignOut} from "@phosphor-icons/react";
 
 export const NavBar = () => {
 
-    type AuthData = {
-        authenticated: boolean;
-        tokenData?: TokenData;
-    }
-    const [authData, setAuthData] = useState<AuthData>(
-        {
-            authenticated: false
-        }
-    )
+    const{authContextData, setAuthContextData} = useContext(AuthContext);
+
+    // const [authData, setAuthData] = useState<AuthContextData>(
+    //     {
+    //         authenticated: false
+    //     }
+    // )
 
     useEffect(() => {
         if (isAuthenticated()) {
-            setAuthData({
+            setAuthContextData({
                 authenticated: true,
                 tokenData: getTokenData()
             });
         } else {
-            setAuthData({
+            setAuthContextData({
                 authenticated: false
             })
         }
 
-    }, []);
+    }, [setAuthContextData]);
 
     const handleLogoutAfterClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
         removeAuthDataToLocalStorage();
-        setAuthData({
+        setAuthContextData({
             authenticated: false
         });
 
@@ -92,10 +91,17 @@ export const NavBar = () => {
                 </div>
 
                 <div className={"container-login-logout"}>
-                    {authData.authenticated ? (
+                    {authContextData.authenticated ? (
                         <div className={"content-username-login-logout"}>
-                            <span className={"nav-username"}>{authData.tokenData?.user_name}</span>
-                            <a href="#logout" onClick={handleLogoutAfterClick}>SAIR</a>
+                            <span className={"nav-username"}>{authContextData.tokenData?.user_name}</span>
+                            <a href="#logout" onClick={handleLogoutAfterClick} className={"nav-link"}>
+                                SAIR
+                                <SignOut
+                                    className={"nav-link-icon"}
+                                    size={30}
+                                    color="#f5f5f5"
+                                    weight="regular" />
+                            </a>
                         </div>
 
                     ) : (

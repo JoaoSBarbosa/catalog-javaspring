@@ -1,9 +1,10 @@
 import "./styles.css";
 import {ButtonIcon} from "../../../../components/Buttons/ButtonIcon";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {getAuthDataToLocalStorage, handleRequestLogin, saveAuthDataToLocalStorage} from "../../../../util/request";
+import {getTokenData, handleRequestLogin, saveAuthDataToLocalStorage} from "../../../../util/request";
+import {AuthContext} from "../../../../AuthContext";
 
 
 type FormData = {
@@ -12,6 +13,8 @@ type FormData = {
 }
 export const Login = () => {
 
+    const{setAuthContextData} = useContext(AuthContext);
+
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>()
 
     const [hasError, setHasError] = useState<boolean>(false)
@@ -19,10 +22,12 @@ export const Login = () => {
     const onSubmit = (formData: FormData) => {
         handleRequestLogin(formData)
             .then(response => {
-                console.log("Sucesso", response)
                 saveAuthDataToLocalStorage(response.data)
                 setHasError(false)
-                console.log(getAuthDataToLocalStorage());
+                setAuthContextData({
+                    authenticated:true,
+                    tokenData: getTokenData()
+                })
                 history.push('/admin')
             })
             .catch(error => {

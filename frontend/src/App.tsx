@@ -1,17 +1,22 @@
 import "./assets/styles/custom.scss";
 import "./App.css";
 // Importação de componentes
-import { NavBar } from "./components/Navbar";
-import { Home } from "pages/Home";
-import { Catalog } from "pages/Catalog";
-import { Routes } from "Routes";
+import {NavBar} from "./components/Navbar";
+import {Home} from "pages/Home";
+import {Catalog} from "pages/Catalog";
+import {Routes} from "Routes";
+import {useState} from "react";
+import {AuthContext, AuthContextData} from "./AuthContext";
 
 function App() {
-  return (
-    <>
-      <Routes />
-    </>
-  );
+    const [authContextData, setAuthContextData] = useState<AuthContextData>({
+        authenticated: false
+    });
+    return (
+        <AuthContext.Provider value={{authContextData, setAuthContextData}}>
+            <Routes/>
+        </AuthContext.Provider>
+    );
 }
 
 export default App;
