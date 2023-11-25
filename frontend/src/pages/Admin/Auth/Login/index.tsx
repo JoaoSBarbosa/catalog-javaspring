@@ -1,7 +1,7 @@
 import "./styles.css";
 import {ButtonIcon} from "../../../../components/Buttons/ButtonIcon";
 import React, {useContext, useState} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {getTokenData, handleRequestLogin, saveAuthDataToLocalStorage} from "../../../../util/request";
 import {AuthContext} from "../../../../AuthContext";
@@ -11,8 +11,14 @@ type FormData = {
     username: string
     password: string
 }
+
+type LocationState={
+    from:string;
+}
 export const Login = () => {
 
+    const location = useLocation<LocationState>()
+    const {from}=location.state || {from:{pathname: "/admin"}}
     const{setAuthContextData} = useContext(AuthContext);
 
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>()
@@ -28,7 +34,7 @@ export const Login = () => {
                     authenticated:true,
                     tokenData: getTokenData()
                 })
-                history.push('/admin')
+                history.replace(from)
             })
             .catch(error => {
                 console.log("Deu erro", error)
