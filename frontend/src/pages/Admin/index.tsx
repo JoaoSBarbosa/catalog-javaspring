@@ -3,8 +3,8 @@ import "./styles.css";
 import {Pagination} from "../../components/Pagination";
 import {Navbar} from "./Navbar";
 import {Switch} from "react-router-dom";
-import {Products} from "./pages/Products";
-import {Users} from "./User";
+import {Products} from "./Products";
+import {Users} from "./Users";
 import PrivateRoute from "../../components/PrivateRouter";
 
 export const Admin = () => {
