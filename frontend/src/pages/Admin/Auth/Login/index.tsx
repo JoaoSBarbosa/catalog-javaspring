@@ -3,8 +3,10 @@ import {ButtonIcon} from "../../../../components/Buttons/ButtonIcon";
 import React, {useContext, useState} from "react";
 import {Link, useHistory, useLocation} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {getTokenData, handleRequestLogin, saveAuthDataToLocalStorage} from "../../../../util/request";
+import {handleRequestLogin} from "../../../../util/request";
+import {saveAuthDataToLocalStorage} from "util/storage";
 import {AuthContext} from "../../../../AuthContext";
+import {getTokenData} from "util/auth";
 
 
 type FormData = {

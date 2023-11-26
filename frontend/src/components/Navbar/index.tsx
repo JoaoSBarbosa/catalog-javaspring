@@ -2,7 +2,8 @@ import {Link, NavLink} from "react-router-dom";
 import "./styles.css";
 import "bootstrap/js/src/collapse.js";
 import logo from "assets/images/logo-cyber2.png";
-import {getTokenData, isAuthenticated, removeAuthDataToLocalStorage} from "../../util/request";
+import {getTokenData,isAuthenticated} from "util/auth";
+import{removeAuthDataToLocalStorage} from "util/storage"
 import {useContext, useEffect} from "react";
 import history from "../../util/history";
 import {AuthContext} from "../../AuthContext";

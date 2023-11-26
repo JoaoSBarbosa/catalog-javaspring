@@ -1,6 +1,6 @@
 import "./styles.css";
 import {NavLink} from "react-router-dom";
-import {hasAnyRoles} from "../../../util/request";
+import{hasAnyRoles} from "util/auth"
 
 export const Navbar = () => {
     return (
