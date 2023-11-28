@@ -12,8 +12,8 @@ type cardProps ={
 
 export const ProductCard = ({product}: cardProps) => {
   return (
-    <div className="base-card product-card">
-      <div className="card-top-container">
+    <div className="base-card product-crud-product-card">
+      <div className="product-crud-card-top-container">
         <img
             src={product.imgUrl?product.imgUrl:"https://uploaddeimagens.com.br/images/004/656/445/full/logo-cyber2.png?1699207931"}
             alt={product.name}
@@ -21,7 +21,7 @@ export const ProductCard = ({product}: cardProps) => {
         />
       </div>
 
-      <div className="card-bottom-container">
+      <div className="product-crud-card-bottom-container">
         <h6>{product.name}</h6>
         <ProductPrice price={product.price} />
       </div>
