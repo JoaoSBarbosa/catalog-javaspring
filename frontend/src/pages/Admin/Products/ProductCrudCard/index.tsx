@@ -28,6 +28,14 @@ export const ProductCrudCard = ({product}: cardProps) => {
                         <CategoryBadge name={category.name} key={category.id}/>
                     ))}
                 </div>
+                <div className={"product-crud-card-buttons-container"}>
+                    <button className={"btn btn-outline-danger product-crud-card-button"}>
+                        EXCLUIR
+                    </button>
+                    <button className={"btn btn-outline-dark product-crud-card-button"}>
+                        EDITAR
+                    </button>
+                </div>
             </div>
 
 

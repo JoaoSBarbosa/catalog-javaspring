@@ -13,8 +13,19 @@ export const List = () => {
         "date": "2020-07-14T10:00:00Z",
         "categories": [
             {
+                "id": 1,
+                "name": "Eletrônicos",
+
+            },
+            {
                 "id": 2,
-                "name": "Eletrônicos"
+                "name": "Livros",
+
+            },
+            {
+                "id": 3,
+                "name": "Developers",
+
             }
         ]
     }
