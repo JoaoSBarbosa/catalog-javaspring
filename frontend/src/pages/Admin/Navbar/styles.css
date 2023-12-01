@@ -2,6 +2,8 @@
 .admin-nav-container {
     padding: 10px;
     background-color: #fff;
+
+    border: 1px solid red;
 }
 
 .admin-nav-content {

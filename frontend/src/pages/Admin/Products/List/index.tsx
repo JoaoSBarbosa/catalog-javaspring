@@ -44,19 +44,22 @@ export const List = () => {
             <div className={"row"}>
                 <div className={"col-sm-6 col-md-12"}>
                     <ProductCrudCard product={product}/>
-                </div> <div className={"col-sm-6 col-md-12"}>
-                    <ProductCrudCard product={product}/>
-                </div> <div className={"col-sm-6 col-md-12"}>
-                    <ProductCrudCard product={product}/>
-                </div> <div className={"col-sm-6 col-md-12"}>
-                    <ProductCrudCard product={product}/>
                 </div>
                 <div className={"col-sm-6 col-md-12"}>
                     <ProductCrudCard product={product}/>
                 </div>
-                <div className={"col-sm-6 col-md-12"}>
-                    <ProductCrudCard product={product}/>
-                </div>
+                {/*<div className={"col-sm-6 col-md-12"}>*/}
+                {/*    <ProductCrudCard product={product}/>*/}
+                {/*</div>*/}
+                {/*<div className={"col-sm-6 col-md-12"}>*/}
+                {/*    <ProductCrudCard product={product}/>*/}
+                {/*</div>*/}
+                {/*<div className={"col-sm-6 col-md-12"}>*/}
+                {/*    <ProductCrudCard product={product}/>*/}
+                {/*</div>*/}
+                {/*<div className={"col-sm-6 col-md-12"}>*/}
+                {/*    <ProductCrudCard product={product}/>*/}
+                {/*</div>*/}
 
             </div>
 

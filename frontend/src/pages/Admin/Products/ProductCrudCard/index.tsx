@@ -9,16 +9,19 @@ type cardProps = {
 
 export const ProductCrudCard = ({product}: cardProps) => {
     return (
-        <div className="base-card product-crud-product-card">
+        <div className="base-card product-crud-card">
+
             <div className="product-crud-card-top-container">
                 <img
                     src={product.imgUrl ? product.imgUrl : "https://uploaddeimagens.com.br/images/004/656/445/full/logo-cyber2.png?1699207931"}
                     alt={product.name}
-                    style={{height: "360px"}}
+                    width={158}
+                    height={158}
+
                 />
             </div>
 
-            <div>
+            <div className={"product-crud-card-description"}>
                 <div className="product-crud-card-bottom-container">
                     <h6>{product.name}</h6>
                     <ProductPrice price={product.price}/>
@@ -28,14 +31,15 @@ export const ProductCrudCard = ({product}: cardProps) => {
                         <CategoryBadge name={category.name} key={category.id}/>
                     ))}
                 </div>
-                <div className={"product-crud-card-buttons-container"}>
-                    <button className={"btn btn-outline-danger product-crud-card-button"}>
-                        EXCLUIR
-                    </button>
-                    <button className={"btn btn-outline-dark product-crud-card-button"}>
-                        EDITAR
-                    </button>
-                </div>
+            </div>
+
+            <div className={"product-crud-card-buttons-container"}>
+                <button className={"btn btn-outline-danger product-crud-card-button"}>
+                    EXCLUIR
+                </button>
+                <button className={"btn btn-outline-dark product-crud-card-button"}>
+                    EDITAR
+                </button>
             </div>
 
 
