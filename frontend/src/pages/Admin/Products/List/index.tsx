@@ -2,33 +2,36 @@ import {ProductCrudCard} from "../ProductCrudCard";
 
 import "./styles.css";
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {SpringPage} from "../../../../types/vendor/SpringPage";
+import {Product} from "../../../../types/Product";
+import {AxiosRequestConfig} from "axios";
+import {handleRequestBackend} from "../../../../util/request";
+import CatalogMagic from "../../../Catalog/loader";
 
 export const List = () => {
-    const product = {
-        "id": 5,
-        "name": "Rails for Dummies",
-        "description": "Inicie sua jornada no desenvolvimento web com \"Rails for Dummies\". Aprenda os conceitos essenciais de forma fácil e divertida.",
-        "price": 100.99,
-        "imgUrl": "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/5-big.jpg",
-        "date": "2020-07-14T10:00:00Z",
-        "categories": [
-            {
-                "id": 1,
-                "name": "Eletrônicos",
-
-            },
-            {
-                "id": 2,
-                "name": "Livros",
-
-            },
-            {
-                "id": 3,
-                "name": "Developers",
-
+    const [page, setPage] = useState<SpringPage<Product>>();
+    const [isLoading, setIsLoading] = useState(false)
+    useEffect(() => {
+        const params: AxiosRequestConfig = {
+            method: 'GET',
+            url: "/produtos",
+            params: {
+                page: 0,
+                size: 52,
             }
-        ]
-    }
+        };
+        setIsLoading(true);
+
+        handleRequestBackend(params)
+            .then((response) => {
+                setPage(response.data)
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }, []);
+
     return (
 
         <div className={"product-crud-container"}>
@@ -42,19 +45,21 @@ export const List = () => {
             </div>
 
             <div className={"row"}>
-                <div className={"col-sm-6 col-md-12"}>
-                    <ProductCrudCard product={product}/>
-                </div>
-                <div className={"col-sm-6 col-md-12"}>
-                    <ProductCrudCard product={product}/>
-                </div>
-                <div className={"col-sm-6 col-md-12"}>
-                    <ProductCrudCard product={product}/>
-                </div>
-
+                {isLoading ?
+                    (
+                        <CatalogMagic
+                            backgroundColor={"#bbb"}
+                        />
+                    ) :
+                    (
+                        page?.content.map((product) => (
+                            <div key={product.id} className={"col-sm-6 col-md-12"} >
+                                <ProductCrudCard product={product}/>
+                            </div>
+                        ))
+                    )
+                }
             </div>
-
-
         </div>
     )
 }
