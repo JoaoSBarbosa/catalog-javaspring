@@ -22,18 +22,19 @@ export const Form = () => {
 
                         </div>
                         <div className={"col-lg-6"}>
-                            <textarea
-                                name=""
-                                rows={5}
-                                className={"form-control"}
-                            >
+                           <div>
+                                <textarea
+                                    name=""
+                                    rows={10}
+                                    className={"form-control base-input h-auto"}
+                                />
+                           </div>
 
-                            </textarea>
                         </div>
                     </div>
                     <div className={"product-crud-buttons-container"}>
-                        <button className={"btn btn-outline-danger"}>Cancelar</button>
-                        <button className={"btn btn-success"}>Salvar</button>
+                        <button className={"btn btn-outline-danger product-crud-button"}>Cancelar</button>
+                        <button className={"btn btn-success product-crud-button text-white"}>Salvar</button>
                     </div>
                 </form>
             </div>
