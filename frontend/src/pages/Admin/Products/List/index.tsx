@@ -31,7 +31,7 @@ export const List = () => {
     }
     return (
 
-        <>
+        <div className={"product-crud-container"}>
             <div className={"product-crud-bar-container"}>
                 <Link to={"/admin/products/create"}>
                     <button className={"btn btn-primary btn-crud-add"}>ADICIONAR</button>
@@ -48,22 +48,13 @@ export const List = () => {
                 <div className={"col-sm-6 col-md-12"}>
                     <ProductCrudCard product={product}/>
                 </div>
-                {/*<div className={"col-sm-6 col-md-12"}>*/}
-                {/*    <ProductCrudCard product={product}/>*/}
-                {/*</div>*/}
-                {/*<div className={"col-sm-6 col-md-12"}>*/}
-                {/*    <ProductCrudCard product={product}/>*/}
-                {/*</div>*/}
-                {/*<div className={"col-sm-6 col-md-12"}>*/}
-                {/*    <ProductCrudCard product={product}/>*/}
-                {/*</div>*/}
-                {/*<div className={"col-sm-6 col-md-12"}>*/}
-                {/*    <ProductCrudCard product={product}/>*/}
-                {/*</div>*/}
+                <div className={"col-sm-6 col-md-12"}>
+                    <ProductCrudCard product={product}/>
+                </div>
 
             </div>
 
 
-        </>
+        </div>
     )
 }
