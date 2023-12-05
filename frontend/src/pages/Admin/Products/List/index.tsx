@@ -12,6 +12,8 @@ import CatalogMagic from "../../../Catalog/loader";
 export const List = () => {
     const [page, setPage] = useState<SpringPage<Product>>();
     const [isLoading, setIsLoading] = useState(false)
+
+
     useEffect(() => {
         const params: AxiosRequestConfig = {
             method: 'GET',
