@@ -5,9 +5,13 @@ import {handleRequestBackend, handleRequestLogin} from "../../../../util/request
 import {saveAuthDataToLocalStorage} from "../../../../util/storage";
 import {useState} from "react";
 import {AxiosRequestConfig} from "axios";
+import * as events from "events";
+import {useHistory} from "react-router-dom";
 
 type FormData = {}
 export const Form = () => {
+    const history = useHistory();
+
     const {register, handleSubmit, formState: {errors}} = useForm<Product>();
     const [hasError, setHasError] = useState<boolean>(false)
 
@@ -28,6 +32,9 @@ export const Form = () => {
                 setHasError(true);
             })
     }
+    const handleCancel=()=>{
+        history.push("/admin/products")
+    }
 
     return (
         <div className={"product-crud-container"}>
@@ -43,7 +50,6 @@ export const Form = () => {
                                     {...register("name", {
                                         required: "O nome do produto é obrigatório",
                                     })}
-
                                     type="text"
                                     className={`form-control base-input ${errors.name ? 'is-invalid' : ''}`}
                                     placeholder={"Nome do produto"}
@@ -51,32 +57,32 @@ export const Form = () => {
                                 />
                                 <div className={"invalid-feedback d-block"}>{errors.name?.message}</div>
                             </div>
+
+                            {/*<div className={"product-crud-input"}>*/}
+                            {/*    <input*/}
+                            {/*        {...register("categories", {*/}
+                            {/*            required: "Selecione uma categoria para o produto"*/}
+                            {/*        })}*/}
+                            {/*        type="text"*/}
+                            {/*        className={`form-control base-input ${errors.categories ? 'is-invalid' : ''}`}*/}
+                            {/*        placeholder={"Categoria"}*/}
+                            {/*        name={"categories"}*/}
+                            {/*        />*/}
+                            {/*    <div className={"invalid-feedback d-block"}>{errors.categories?.message}</div>*/}
+                            {/*</div>*/}
+
                             <div className={"product-crud-input"}>
 
                                 <input
-                                    {...register("description", {
-                                        required: "Insira uma descrição para o produto"
+                                    {...register("price", {
+                                        required: "O campo preço é obrigatório"
                                     })}
                                     type="text"
-                                    placeholder={"Descrição"}
-                                    className={`form-control base-input ${errors.description ? 'is-invalid' : ''}`}
-                                    name={"description"}
+                                    placeholder={"Preço"}
+                                    className={`form-control base-input ${errors.price ? 'is-invalid' : ''}`}
+                                    name={"price"}
                                 />
-                                <div className={"invalid-feedback d-block"}>{errors.description?.message}</div>
-
-                            </div>
-                            <div className={"product-crud-input"}>
-
-                                <input
-                                    {...register("categories", {
-                                        required: "Selecione uma categoria para o produto"
-                                    })}
-                                    type="text"
-                                    className={`form-control base-input ${errors.categories ? 'is-invalid' : ''}`}
-                                    placeholder={"Categoria"}
-                                    name={"categories"}
-                                    />
-                                <div className={"invalid-feedback d-block"}>{errors.categories?.message}</div>
+                                <div className={"invalid-feedback d-block"}>{errors.price?.message}</div>
 
                             </div>
 
@@ -84,16 +90,27 @@ export const Form = () => {
                         <div className={"col-lg-6"}>
                             <div>
                                 <textarea
-                                    name=""
+                                    {...register("description", {
+                                        required: "O campo descrição é obrigatório"
+                                    })}
+                                    name="description"
                                     rows={10}
-                                    className={"form-control base-input h-auto"}
+                                    placeholder={"Descrição do produto..."}
+                                    className={`form-control base-input h-auto ${errors.description ? 'is-invalid' : ''}`}
+
                                 />
+                                <div className={"invalid-feedback d-block"}>{errors.description?.message}</div>
+
                             </div>
 
                         </div>
                     </div>
                     <div className={"product-crud-buttons-container"}>
-                        <button className={"btn btn-outline-danger product-crud-button"}>Cancelar</button>
+                        <button
+                            className={"btn btn-outline-danger product-crud-button"}
+                            onClick={handleCancel}>
+                            Cancelar
+                        </button>
                         <button className={"btn btn-success product-crud-button text-white"}>Salvar</button>
                     </div>
                 </form>
