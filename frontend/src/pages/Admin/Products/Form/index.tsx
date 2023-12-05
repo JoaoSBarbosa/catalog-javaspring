@@ -16,10 +16,17 @@ export const Form = () => {
     const [hasError, setHasError] = useState<boolean>(false)
 
     const onSubmit = (formProduct: Product) => {
+        const data =
+            {
+                ...formProduct,
+                categories: [
+                    {id: 1, name: ""}
+                ]
+            }
         const config: AxiosRequestConfig = {
             method: "POST",
-            url: "/produto",
-            data: formProduct,
+            url: "/produtos",
+            data: data,
             withCredentials: true
         };
 
@@ -32,7 +39,7 @@ export const Form = () => {
                 setHasError(true);
             })
     }
-    const handleCancel=()=>{
+    const handleCancel = () => {
         history.push("/admin/products")
     }
 
