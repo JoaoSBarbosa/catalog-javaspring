@@ -7,6 +7,7 @@ import {Axios, AxiosRequestConfig} from "axios";
 import {handleRequestBackend} from "../../../../util/request";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
+import {Link} from "react-router-dom";
 
 type cardProps = {
     product: Product;
@@ -64,9 +65,12 @@ export const ProductCrudCard = ({product}: cardProps) => {
                 >
                     EXCLUIR
                 </button>
-                <button className={"btn btn-outline-dark product-crud-card-button"}>
-                    EDITAR
-                </button>
+                <Link to={`/admin/products/${product.id}`}>
+                    <button className={"btn btn-outline-dark product-crud-card-button"}>
+                        EDITAR
+                    </button>
+                </Link>
+
             </div>
 
 

@@ -15,6 +15,7 @@ export const Form = () => {
     const {register, handleSubmit, formState: {errors}} = useForm<Product>();
     const [hasError, setHasError] = useState<boolean>(false)
 
+    const productListingRoute = "/admin/products/";
     const onSubmit = (formProduct: Product) => {
         const data =
             {
@@ -31,16 +32,16 @@ export const Form = () => {
         };
 
         handleRequestBackend(config)
-            .then((response) => {
+            .then(() => {
                 setHasError(false);
-                console.log(response.data)
+                history.push(productListingRoute);
             })
             .catch((errors) => {
                 setHasError(true);
             })
     }
     const handleCancel = () => {
-        history.push("/admin/products")
+        history.push(productListingRoute)
     }
 
     return (
