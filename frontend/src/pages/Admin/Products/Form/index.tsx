@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {AxiosRequestConfig} from "axios";
 import * as events from "events";
 import {useHistory, useParams} from "react-router-dom";
+import Select from 'react-select'
 
 export type UrlParams = {
     productId: string;
@@ -76,6 +77,11 @@ export const Form = () => {
         history.push(productListingRoute)
     }
 
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ]
     return (
         <div className={"product-crud-container"}>
 
@@ -98,18 +104,28 @@ export const Form = () => {
                                 <div className={"invalid-feedback d-block"}>{errors.name?.message}</div>
                             </div>
 
-                            {/*<div className={"product-crud-input"}>*/}
-                            {/*    <input*/}
-                            {/*        {...register("categories", {*/}
-                            {/*            required: "Selecione uma categoria para o produto"*/}
-                            {/*        })}*/}
-                            {/*        type="text"*/}
-                            {/*        className={`form-control base-input ${errors.categories ? 'is-invalid' : ''}`}*/}
-                            {/*        placeholder={"Categoria"}*/}
-                            {/*        name={"categories"}*/}
-                            {/*        />*/}
-                            {/*    <div className={"invalid-feedback d-block"}>{errors.categories?.message}</div>*/}
-                            {/*</div>*/}
+
+
+                            <div className={"product-crud-input"}>
+                                <Select
+                                    options={options}
+                                    isMulti
+                                    classNamePrefix={"product-crud-select"}
+                                />
+
+                                {/*<input*/}
+                                {/*    {...register("categories", {*/}
+                                {/*        required: "Selecione uma categoria para o produto"*/}
+                                {/*    })}*/}
+                                {/*    type="text"*/}
+                                {/*    className={`form-control base-input ${errors.categories ? 'is-invalid' : ''}`}*/}
+                                {/*    placeholder={"Categoria"}*/}
+                                {/*    name={"categories"}*/}
+                                {/*    />*/}
+                                {/*<div className={"invalid-feedback d-block"}>{errors.categories?.message}</div>*/}
+                            </div>
+
+
 
                             <div className={"product-crud-input"}>
 
