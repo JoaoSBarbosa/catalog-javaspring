@@ -11,9 +11,10 @@ import {Link} from "react-router-dom";
 
 type cardProps = {
     product: Product;
+    onDelete: Function;
 }
 
-export const ProductCrudCard = ({product}: cardProps) => {
+export const ProductCrudCard = ({product,onDelete}: cardProps) => {
     const handleDelete = (productId: number) => {
 
         if(!window.confirm("Deseja realmente deletar este produto?")){
@@ -26,7 +27,7 @@ export const ProductCrudCard = ({product}: cardProps) => {
         };
         handleRequestBackend(config)
             .then(() => {
-                console.log("Deletado id" + productId)
+                onDelete();
             })
             .catch((error) => {
                 console.log("Deu erro: " + error)
