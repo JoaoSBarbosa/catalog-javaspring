@@ -60,18 +60,10 @@ export const Form = () => {
     }, []);
 
     const onSubmit = (formProduct: Product) => {
-        const data =
-            {
-                ...formProduct,
-                imgUrl: isEditing ? formProduct.imgUrl : "https://uploaddeimagens.com.br/images/004/662/070/full/console-nintendo-removebg-preview.png?1699664167",
-                categories: isEditing ? formProduct.categories : [
-                    {id: 1, name: ""}
-                ]
-            }
         const config: AxiosRequestConfig = {
             method: isEditing ? "PUT" : "POST",
             url: isEditing ? `/produtos/${productId}` : "/produtos",
-            data: data,
+            data: formProduct,
             withCredentials: true
         };
 
@@ -136,34 +128,7 @@ export const Form = () => {
                                 }
                             </div>
 
-                            {/*<div className={"product-crud-input"}>*/}
-                            {/*    <Controller*/}
-
-                            {/*        name={"categories"}*/}
-                            {/*        rules={{*/}
-                            {/*            required: true*/}
-                            {/*        }}*/}
-                            {/*        control={control}*/}
-                            {/*        render={({field}) => (*/}
-                            {/*            <Select {...field}*/}
-                            {/*                    options={selectCategories}*/}
-                            {/*                    isMulti*/}
-                            {/*                    getOptionLabel={(category: Category) => category.name}*/}
-                            {/*                    getOptionValue={(category: Category) => String(category.id)}*/}
-                            {/*                    classNamePrefix={"product-crud-select"}*/}
-                            {/*            />*/}
-                            {/*        )}*/}
-                            {/*    />*/}
-                            {/*    {errors.categories &&*/}
-                            {/*        <div className={"invalid-feedback d-block"}>*/}
-                            {/*            Selecione uma categoria para o produto</div>*/}
-                            {/*    }*/}
-                            {/*    */}
-                            {/*</div>*/}
-
-
                             <div className={"product-crud-input"}>
-
                                 <input
                                     {...register("price", {
                                         required: "Por favor, informe o preço do produto."
@@ -175,6 +140,26 @@ export const Form = () => {
                                 />
                                 <div className={"invalid-feedback d-block"}>{errors.price?.message}</div>
 
+                            </div>
+
+
+
+                            <div className={"product-crud-input"}>
+                                <input
+                                    {...register("imgUrl", {
+                                        required: "Por favor, insira uma imagem do produto.",
+                                        pattern:{
+                                            value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                                            message: "URL inválido"
+
+                                        }
+                                    })}
+                                    type="text"
+                                    className={`form-control base-input ${errors.imgUrl ? 'is-invalid' : ''}`}
+                                    placeholder={"URL da imagem do produto"}
+                                    name={"imgUrl"}
+                                />
+                                <div className={"invalid-feedback d-block"}>{errors.imgUrl?.message}</div>
                             </div>
 
                         </div>
