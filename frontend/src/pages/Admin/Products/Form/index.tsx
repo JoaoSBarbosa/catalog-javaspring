@@ -1,5 +1,5 @@
 import "./styles.css";
-import {useForm} from "react-hook-form";
+import {useForm, Controller} from "react-hook-form";
 import {Product} from "../../../../types/Product";
 import {handleRequestBackend, handleRequestLogin} from "../../../../util/request";
 import {saveAuthDataToLocalStorage} from "../../../../util/storage";
@@ -22,14 +22,14 @@ export const Form = () => {
     const isEditing = productId !== "create";
     const [hasError, setHasError] = useState<boolean>(false)
 
-    const[selectCategories,setSelectCategories] = useState<Category[]>([]);
+    const [selectCategories, setSelectCategories] = useState<Category[]>([]);
     const productListingRoute = "/admin/products/";
 
     const {
         register,
         handleSubmit,
-        formState:
-            {errors},
+        formState: {errors},
+        control,
         setValue
     } = useForm<Product>();
 
@@ -49,12 +49,11 @@ export const Form = () => {
     }, [isEditing, productId, setValue]);
 
 
-
     useEffect(() => {
         handleRequestBackend({
-            url:`/categorias`
+            url: `/categorias`
         })
-            .then((response)=>{
+            .then((response) => {
                 const categoriesRequest = response.data.content;
                 setSelectCategories(categoriesRequest);
             })
@@ -70,8 +69,8 @@ export const Form = () => {
                 ]
             }
         const config: AxiosRequestConfig = {
-            method: isEditing?"PUT": "POST",
-            url: isEditing?`/produtos/${productId}`: "/produtos",
+            method: isEditing ? "PUT" : "POST",
+            url: isEditing ? `/produtos/${productId}` : "/produtos",
             data: data,
             withCredentials: true
         };
@@ -90,9 +89,9 @@ export const Form = () => {
     }
 
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
+        {value: 'chocolate', label: 'Chocolate'},
+        {value: 'strawberry', label: 'Strawberry'},
+        {value: 'vanilla', label: 'Vanilla'}
     ]
     return (
         <div className={"product-crud-container"}>
@@ -106,7 +105,7 @@ export const Form = () => {
                             <div className={"product-crud-input"}>
                                 <input
                                     {...register("name", {
-                                        required: "O nome do produto é obrigatório",
+                                        required: "Por favor, informe o nome do produto.",
                                     })}
                                     type="text"
                                     className={`form-control base-input ${errors.name ? 'is-invalid' : ''}`}
@@ -115,37 +114,59 @@ export const Form = () => {
                                 />
                                 <div className={"invalid-feedback d-block"}>{errors.name?.message}</div>
                             </div>
-
-
-
                             <div className={"product-crud-input"}>
-                                <Select
-                                    options={selectCategories}
-                                    isMulti
-                                    getOptionLabel={(category: Category)=>category.name}
-                                    getOptionValue={(category: Category)=> String(category.id)}
-                                    classNamePrefix={"product-crud-select"}
+                                <Controller
+                                    name={"categories"}
+                                    rules={{required: "Selecione uma categoria para o produto."}}
+                                    control={control}
+                                    render={({field}) => (
+                                        <Select {...field}
+                                                options={selectCategories}
+                                                isMulti
+                                                getOptionLabel={(category: Category) => category.name}
+                                                getOptionValue={(category: Category) => String(category.id)}
+                                                classNamePrefix={"product-crud-select"}
+                                        />
+                                    )}
                                 />
-
-                                {/*<input*/}
-                                {/*    {...register("categories", {*/}
-                                {/*        required: "Selecione uma categoria para o produto"*/}
-                                {/*    })}*/}
-                                {/*    type="text"*/}
-                                {/*    className={`form-control base-input ${errors.categories ? 'is-invalid' : ''}`}*/}
-                                {/*    placeholder={"Categoria"}*/}
-                                {/*    name={"categories"}*/}
-                                {/*    />*/}
-                                {/*<div className={"invalid-feedback d-block"}>{errors.categories?.message}</div>*/}
+                                {errors.categories &&
+                                    <div className={"invalid-feedback d-block"}>
+                                        {errors.categories.message}
+                                    </div>
+                                }
                             </div>
 
+                            {/*<div className={"product-crud-input"}>*/}
+                            {/*    <Controller*/}
+
+                            {/*        name={"categories"}*/}
+                            {/*        rules={{*/}
+                            {/*            required: true*/}
+                            {/*        }}*/}
+                            {/*        control={control}*/}
+                            {/*        render={({field}) => (*/}
+                            {/*            <Select {...field}*/}
+                            {/*                    options={selectCategories}*/}
+                            {/*                    isMulti*/}
+                            {/*                    getOptionLabel={(category: Category) => category.name}*/}
+                            {/*                    getOptionValue={(category: Category) => String(category.id)}*/}
+                            {/*                    classNamePrefix={"product-crud-select"}*/}
+                            {/*            />*/}
+                            {/*        )}*/}
+                            {/*    />*/}
+                            {/*    {errors.categories &&*/}
+                            {/*        <div className={"invalid-feedback d-block"}>*/}
+                            {/*            Selecione uma categoria para o produto</div>*/}
+                            {/*    }*/}
+                            {/*    */}
+                            {/*</div>*/}
 
 
                             <div className={"product-crud-input"}>
 
                                 <input
                                     {...register("price", {
-                                        required: "O campo preço é obrigatório"
+                                        required: "Por favor, informe o preço do produto."
                                     })}
                                     type="text"
                                     placeholder={"Preço"}
@@ -161,7 +182,7 @@ export const Form = () => {
                             <div>
                                 <textarea
                                     {...register("description", {
-                                        required: "O campo descrição é obrigatório"
+                                        required: "Por favor, forneça uma descrição para o produto."
                                     })}
                                     name="description"
                                     rows={10}
