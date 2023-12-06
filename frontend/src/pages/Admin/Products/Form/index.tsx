@@ -8,6 +8,7 @@ import {AxiosRequestConfig} from "axios";
 import * as events from "events";
 import {useHistory, useParams} from "react-router-dom";
 import Select from 'react-select'
+import {Category} from "../../../../types/Category";
 
 export type UrlParams = {
     productId: string;
@@ -19,6 +20,10 @@ export const Form = () => {
     const {productId} = useParams<UrlParams>();
 
     const isEditing = productId !== "create";
+    const [hasError, setHasError] = useState<boolean>(false)
+
+    const[selectCategories,setSelectCategories] = useState<Category[]>([]);
+    const productListingRoute = "/admin/products/";
 
     const {
         register,
@@ -43,10 +48,17 @@ export const Form = () => {
         }
     }, [isEditing, productId, setValue]);
 
-    const [hasError, setHasError] = useState<boolean>(false)
 
 
-    const productListingRoute = "/admin/products/";
+    useEffect(() => {
+        handleRequestBackend({
+            url:`/categorias`
+        })
+            .then((response)=>{
+                const categoriesRequest = response.data.content;
+                setSelectCategories(categoriesRequest);
+            })
+    }, []);
 
     const onSubmit = (formProduct: Product) => {
         const data =
@@ -108,8 +120,10 @@ export const Form = () => {
 
                             <div className={"product-crud-input"}>
                                 <Select
-                                    options={options}
+                                    options={selectCategories}
                                     isMulti
+                                    getOptionLabel={(category: Category)=>category.name}
+                                    getOptionValue={(category: Category)=> String(category.id)}
                                     classNamePrefix={"product-crud-select"}
                                 />
 
