@@ -3,30 +3,62 @@ import {useForm} from "react-hook-form";
 import {Product} from "../../../../types/Product";
 import {handleRequestBackend, handleRequestLogin} from "../../../../util/request";
 import {saveAuthDataToLocalStorage} from "../../../../util/storage";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AxiosRequestConfig} from "axios";
 import * as events from "events";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
-type FormData = {}
+export type UrlParams = {
+    productId: string;
+}
+
 export const Form = () => {
-    const history = useHistory();
 
-    const {register, handleSubmit, formState: {errors}} = useForm<Product>();
+    const history = useHistory();
+    const {productId} = useParams<UrlParams>();
+
+    const isEditing = productId !== "create";
+
+    const {
+        register,
+        handleSubmit,
+        formState:
+            {errors},
+        setValue
+    } = useForm<Product>();
+
+    useEffect(() => {
+        if (isEditing) {
+            handleRequestBackend({url: `/produtos/${productId}`})
+                .then((response) => {
+                    const productRequest = response.data as Product;
+                    setValue('name', productRequest.name);
+                    setValue('price', productRequest.price);
+                    setValue('description', productRequest.description);
+                    setValue('imgUrl', productRequest.imgUrl);
+                    setValue('categories', productRequest.categories);
+
+                })
+        }
+    }, [isEditing, productId, setValue]);
+
     const [hasError, setHasError] = useState<boolean>(false)
 
+
     const productListingRoute = "/admin/products/";
+
     const onSubmit = (formProduct: Product) => {
         const data =
             {
                 ...formProduct,
-                categories: [
+                imgUrl: isEditing ? formProduct.imgUrl : "https://uploaddeimagens.com.br/images/004/662/070/full/console-nintendo-removebg-preview.png?1699664167",
+                categories: isEditing ? formProduct.categories : [
                     {id: 1, name: ""}
                 ]
             }
         const config: AxiosRequestConfig = {
-            method: "POST",
-            url: "/produtos",
+            method: isEditing?"PUT": "POST",
+            url: isEditing?`/produtos/${productId}`: "/produtos",
             data: data,
             withCredentials: true
         };
