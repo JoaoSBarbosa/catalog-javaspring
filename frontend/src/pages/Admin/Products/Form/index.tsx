@@ -9,6 +9,7 @@ import * as events from "events";
 import {useHistory, useParams} from "react-router-dom";
 import Select from 'react-select'
 import {Category} from "../../../../types/Category";
+import CurrencyInput from "react-currency-input-field";
 
 export type UrlParams = {
     productId: string;
@@ -60,10 +61,13 @@ export const Form = () => {
     }, []);
 
     const onSubmit = (formProduct: Product) => {
+
+        const data = {...formProduct, price: String(formProduct.price).replace(",",'.')}
+
         const config: AxiosRequestConfig = {
             method: isEditing ? "PUT" : "POST",
             url: isEditing ? `/produtos/${productId}` : "/produtos",
-            data: formProduct,
+            data,
             withCredentials: true
         };
 
@@ -128,15 +132,23 @@ export const Form = () => {
                                 }
                             </div>
 
+
                             <div className={"product-crud-input"}>
-                                <input
-                                    {...register("price", {
-                                        required: "Por favor, informe o preço do produto."
-                                    })}
-                                    type="text"
-                                    placeholder={"Preço"}
-                                    className={`form-control base-input ${errors.price ? 'is-invalid' : ''}`}
+                                <Controller
                                     name={"price"}
+                                    rules={{required: "Por favor, informe o preço do produto."}}
+                                    control={control}
+                                    render={({field})=>(
+                                        <CurrencyInput
+                                            placeholder={"Preço"}
+                                            className={`form-control base-input ${errors.price ? 'is-invalid' : ''}`}
+                                            disableGroupSeparators={true}
+                                            value={field.value}
+                                            onValueChange={field.onChange}
+                                        />
+
+                                    )}
+
                                 />
                                 <div className={"invalid-feedback d-block"}>{errors.price?.message}</div>
 
