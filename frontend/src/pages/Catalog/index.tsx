@@ -25,7 +25,7 @@ export const Catalog = () => {
             url: `/produtos`,
             params: {
                 page: 0,
-                size: 12
+                size: 12,
             },
         };
 
@@ -59,7 +59,7 @@ export const Catalog = () => {
                     )))}
             </div>
             <div className="row">
-                <Pagination/>
+                <Pagination range={3} pageCount={(page)?page?.totalPages:0}/>
             </div>
         </div>
     );

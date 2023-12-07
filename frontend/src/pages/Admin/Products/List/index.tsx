@@ -13,19 +13,20 @@ import {Pagination} from "../../../../components/Pagination";
 export const List = () => {
     const [page, setPage] = useState<SpringPage<Product>>();
     const [isLoading, setIsLoading] = useState(false)
+    const isMobile = window.innerWidth < 550;
 
 
     useEffect(() => {
-        handleGetProduct();
+        handleGetProduct(0);
     }, []);
 
-    const handleGetProduct = () => {
+    const handleGetProduct = (pageNumber:number) => {
         const params: AxiosRequestConfig = {
             method: 'GET',
             url: "/produtos",
             params: {
-                page: 0,
-                size: 52,
+                page: pageNumber,
+                size: 3,
             }
         };
         setIsLoading(true);
@@ -64,7 +65,7 @@ export const List = () => {
                             <div key={product.id} className={"col-sm-6 col-md-12"}>
                                 <ProductCrudCard
                                     product={product}
-                                    onDelete={()=> handleGetProduct()}
+                                    onDelete={()=> handleGetProduct(page?.number)}
                                 />
                             </div>
                         ))
@@ -72,7 +73,11 @@ export const List = () => {
                 }
             </div>
 
-            <Pagination/>
+            <Pagination
+                pageCount={(page) ? page?.totalPages : 0}
+                range={3}
+                onChange={handleGetProduct}
+            />
         </div>
     )
 }

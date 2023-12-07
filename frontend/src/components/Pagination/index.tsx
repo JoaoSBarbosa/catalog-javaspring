@@ -1,12 +1,24 @@
 import "./styles.css";
 import {ReactComponent as Arrow} from "assets/images/Seta.svg";
 import ReactPaginate from "react-paginate";
+import React from "react";
 
-export const Pagination = () => {
+type PaginationProps = {
+    pageCount: number;
+    range: number;
+    onChange?: (pageNumber: number) => void;
+}
+export const Pagination: React.FC<PaginationProps> = (
+    {
+        pageCount,
+        range,
+        onChange
+    }) => {
+
     return (
         <ReactPaginate
-            pageCount={10}
-            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            pageRangeDisplayed={range}
             marginPagesDisplayed={1}
             containerClassName={"pagination-container"}
             pageLinkClassName={"pagination-item"}
@@ -17,7 +29,13 @@ export const Pagination = () => {
             nextLabel={<Arrow/>}
             activeLinkClassName={"pagination-link-active"}
             disabledClassName={"arrow-inactive"}
+            onPageChange={
+                (items) =>
+                    (onChange) ?
+                        onChange(items.selected) :
+                        {}
+            }
         />
-        
+
     )
 }
