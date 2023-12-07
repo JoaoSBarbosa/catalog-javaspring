@@ -1,3 +1,7 @@
+*{
+    list-style: none;
+}
+
 .pagination-container {
     display: flex;
     justify-content: center;
@@ -24,6 +28,9 @@
 }
 
 .pagination-item.active {
+    background-color: #407bff;
+}
+.pagination-link-active{
     background-color: #407bff;
 }
 .arrow-previous,

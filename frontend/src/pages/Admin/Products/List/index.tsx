@@ -8,6 +8,7 @@ import {Product} from "../../../../types/Product";
 import {AxiosRequestConfig} from "axios";
 import {handleRequestBackend} from "../../../../util/request";
 import CatalogMagic from "../../../Catalog/loader";
+import {Pagination} from "../../../../components/Pagination";
 
 export const List = () => {
     const [page, setPage] = useState<SpringPage<Product>>();
@@ -70,6 +71,8 @@ export const List = () => {
                     )
                 }
             </div>
+
+            <Pagination/>
         </div>
     )
 }
