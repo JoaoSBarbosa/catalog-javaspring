@@ -16,16 +16,16 @@
     margin-bottom: 20px;
 }
 .product-search-container{
+    padding: 15px;
     margin-bottom: 20px;
-    width: 100%;
+
 
 }
-.product-search{
-    padding: 15px;
-    border:none;
-    width: 100%;
-    outline: none;
-}
+/*.product-search{*/
+/*    border:none;*/
+/*    width: 100%;*/
+/*    outline: none;*/
+/*}*/
 @media(min-width:768px){
  .product-crud-bar-container{
      display: flex;
