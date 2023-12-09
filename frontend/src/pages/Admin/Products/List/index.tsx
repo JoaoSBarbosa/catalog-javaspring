@@ -72,12 +72,26 @@ export const List = () => {
                     )
                 }
             </div>
+            {isMobile ? (
+                <div className="row">
+                    <Pagination
+                        range={2}
+                        pageDisplay={0}
+                        pageCount={(page) ? page?.totalPages : 0}
+                        onChange={handleGetProduct}
+                    />
+                </div>
+            ):(
+                <div className="row">
+                    <Pagination
+                        range={3}
+                        pageDisplay={1}
+                        pageCount={(page) ? page?.totalPages : 0}
+                        onChange={handleGetProduct}
+                    />
+                </div>
+            )}
 
-            <Pagination
-                pageCount={(page) ? page?.totalPages : 0}
-                range={3}
-                onChange={handleGetProduct}
-            />
         </div>
     )
 }

@@ -33,6 +33,7 @@
 .pagination-link-active{
     background-color: #407bff;
 }
+
 .pagination_arrow-container{
     display: flex;
     align-items: center;

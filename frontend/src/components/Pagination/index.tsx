@@ -6,20 +6,23 @@ import React from "react";
 type PaginationProps = {
     pageCount: number;
     range: number;
+    pageDisplay:number;
     onChange?: (pageNumber: number) => void;
 }
 export const Pagination: React.FC<PaginationProps> = (
     {
         pageCount,
         range,
+        pageDisplay,
         onChange
     }) => {
 
     return (
         <ReactPaginate
+
             pageCount={pageCount}
             pageRangeDisplayed={range}
-            marginPagesDisplayed={1}
+            marginPagesDisplayed={pageDisplay}
             containerClassName={"pagination-container"}
             pageLinkClassName={"pagination-item"}
             breakClassName={"pagination-item"}

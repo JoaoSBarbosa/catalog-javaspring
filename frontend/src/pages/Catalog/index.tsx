@@ -64,6 +64,7 @@ export const Catalog = () => {
             <div className="row">
                 <Pagination
                     range={3}
+                    pageDisplay={1}
                     pageCount={(page) ? page?.totalPages : 0}
                     onChange={handleGetProduct}
                 />

@@ -2,11 +2,6 @@
 .admin-nav-container {
     padding: 10px;
     background-color: #fff;
-
-    /*border: 1px solid red;*/
-
-    /*max-height: calc(100vh - 80px);*/
-
 }
 
 .admin-nav-content {
@@ -41,6 +36,7 @@
     color: #407bff;
     border: 2px solid rgba(64, 123, 255, 0.7);
 }
+
 @media (min-width: 768px) {
 
     .admin-nav-item {
@@ -54,7 +50,8 @@
         padding: 0;
         width: 300px;
         /*height: calc(100vh - 30px);*/
-        max-height: calc(100vh - 80px);
+        /*max-height: calc(100vh - 80px);*/
+        height: calc(100vh - 66px);
 
     }
 
