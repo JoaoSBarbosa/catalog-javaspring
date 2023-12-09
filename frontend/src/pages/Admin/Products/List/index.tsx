@@ -20,7 +20,7 @@ export const List = () => {
         handleGetProduct(0);
     }, []);
 
-    const handleGetProduct = (pageNumber:number) => {
+    const handleGetProduct = (pageNumber: number) => {
         const params: AxiosRequestConfig = {
             method: 'GET',
             url: "/produtos",
@@ -40,6 +40,11 @@ export const List = () => {
             });
     }
 
+    const [search, setSearch] = useState('');
+
+    const handleFilterList = (event: React.FormEvent<HTMLInputElement>) => {
+        setSearch(event.currentTarget.value)
+    }
 
     return (
 
@@ -48,9 +53,17 @@ export const List = () => {
                 <Link to={"/admin/products/create"}>
                     <button className={"btn btn-primary btn-crud-add"}>ADICIONAR</button>
                 </Link>
-                <div className={"base-card product-search-container"}>
-                    Barra de busca
+                <div className={"product-search-container"}>
+                    {/*Buscar produto por nome...*/}
+                    <input
+                        placeholder={"Buscar produto..."}
+                        className={"base-card product-search"}
+                        type="search"
+                        value={search}
+                        onChange={(event: React.FormEvent<HTMLInputElement>) => handleFilterList(event)}/>
+
                 </div>
+
             </div>
 
             <div className={"row"}>
@@ -61,27 +74,36 @@ export const List = () => {
                         />
                     ) :
                     (
-                        page?.content.map((product) => (
-                            <div key={product.id} className={"col-sm-6 col-md-12"}>
-                                <ProductCrudCard
-                                    product={product}
-                                    onDelete={()=> handleGetProduct(page?.number)}
-                                />
-                            </div>
-                        ))
+                        page?.content
+                            .filter((product) => {
+                                const lowerCaseSearch = search.toLowerCase();
+                                return (
+                                    product.name.toLowerCase().includes(lowerCaseSearch) ||
+                                    product.categories.some((category) => category.name.toLowerCase().includes(lowerCaseSearch)) ||
+                                    product.price.toString().includes(lowerCaseSearch)
+                                )
+                            })
+                            .map((product) => (
+                                <div key={product.id} className={"col-sm-6 col-md-12"}>
+                                    <ProductCrudCard
+                                        product={product}
+                                        onDelete={() => handleGetProduct(page?.number)}
+                                    />
+                                </div>
+                            ))
                     )
                 }
             </div>
             {isMobile ? (
                 <div className="row">
                     <Pagination
-                        range={2}
-                        pageDisplay={0}
+                        range={1}
+                        pageDisplay={1}
                         pageCount={(page) ? page?.totalPages : 0}
                         onChange={handleGetProduct}
                     />
                 </div>
-            ):(
+            ) : (
                 <div className="row">
                     <Pagination
                         range={3}
