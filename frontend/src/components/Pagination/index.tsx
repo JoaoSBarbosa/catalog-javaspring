@@ -24,9 +24,16 @@ export const Pagination: React.FC<PaginationProps> = (
             pageLinkClassName={"pagination-item"}
             breakClassName={"pagination-item"}
             previousClassName={"arrow-previous"}
-            previousLabel={<Arrow/>}
+            previousLabel={
+                <div className={"pagination_arrow-container"}>
+                    <Arrow/>
+                </div>
+            }
             nextClassName={"arrow-next"}
-            nextLabel={<Arrow/>}
+            nextLabel={
+            <div className={"pagination_arrow-container"}>
+            <Arrow/>
+            </div>}
             activeLinkClassName={"pagination-link-active"}
             disabledClassName={"arrow-inactive"}
             onPageChange={
