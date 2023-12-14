@@ -10,22 +10,25 @@ import {handleRequestBackend} from "../../../../util/request";
 import CatalogMagic from "../../../Catalog/loader";
 import {Pagination} from "../../../../components/Pagination";
 
+type ControlComponentsData = {
+    activePage: number
+}
 export const List = () => {
     const [page, setPage] = useState<SpringPage<Product>>();
     const [isLoading, setIsLoading] = useState(false)
     const isMobile = window.innerWidth < 550;
 
-
+    const [controlComponentsData, setControlComponentsData] = useState<ControlComponentsData>(
+        {
+            activePage: 0
+        })
     useEffect(() => {
-        handleGetProduct(0);
-    }, []);
-
-    const handleGetProduct = (pageNumber:number) => {
+        // handleGetProduct();
         const params: AxiosRequestConfig = {
             method: 'GET',
             url: "/produtos",
             params: {
-                page: pageNumber,
+                page: controlComponentsData.activePage,
                 size: 3,
             }
         };
@@ -38,11 +41,18 @@ export const List = () => {
             .finally(() => {
                 setIsLoading(false);
             });
+    }, [controlComponentsData]);
+
+    const handlePageChange = (pageNumber: number) => {
+        setControlComponentsData({activePage: pageNumber})
+    }
+    const handleGetProduct = () => {
+
     }
 
-    const[search,setSearch] = useState('');
+    const [search, setSearch] = useState('');
 
-    const handleFilterList =(event: React.FormEvent<HTMLInputElement>)=>{
+    const handleFilterList = (event: React.FormEvent<HTMLInputElement>) => {
         setSearch(event.currentTarget.value)
     }
 
@@ -71,7 +81,7 @@ export const List = () => {
                             <div key={product.id} className={"col-sm-6 col-md-12"}>
                                 <ProductCrudCard
                                     product={product}
-                                    onDelete={()=> handleGetProduct(page?.number)}
+                                    onDelete={() => handleGetProduct}
                                 />
                             </div>
                         ))
@@ -84,16 +94,16 @@ export const List = () => {
                         range={2}
                         pageDisplay={0}
                         pageCount={(page) ? page?.totalPages : 0}
-                        onChange={handleGetProduct}
+                        onChange={handlePageChange}
                     />
                 </div>
-            ):(
+            ) : (
                 <div className="row">
                     <Pagination
                         range={3}
                         pageDisplay={1}
                         pageCount={(page) ? page?.totalPages : 0}
-                        onChange={handleGetProduct}
+                        onChange={handlePageChange}
                     />
                 </div>
             )}
