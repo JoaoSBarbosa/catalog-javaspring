@@ -52,6 +52,7 @@
     letter-spacing: -0.015em;
     color:#263238!important;
     border-bottom: 1px solid #e1e1e1!important;
+    border-radius: unset;
 
 }
 .product-filter-select__control--is-focused{
@@ -86,9 +87,31 @@
     }
 }
 @media(min-width:768px){
+    .product-filter-btn-clear-word{
+        display: none;
+    }
     .product-search-container{
         flex: 1;
         margin-bottom: 0;
-
+        padding: 10px 15px;
+    }
+    .product-filter-form-container{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        /*justify-content: space-between;*/
+    }
+    .product-filter-name-container{
+        margin: 0;
+        padding: 0;
+    }
+    .product-filter-name-container,
+    .product-filter-bottom-container{
+        flex: 1;
+    }
+}
+@media(min-width:992px){
+    .product-filter-btn-clear-word{
+        display: unset;
     }
 }
