@@ -8,13 +8,42 @@
     border-bottom: 1px solid #E1E1E1;
     padding: 10px;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 .product-filter-name-container input{
     border: none;
     outline: none;
+    background-color: transparent;
+}
+.product-filter-name-container input:focus{
+    box-shadow: none;
+    background-color: transparent;
+}
+.product-filter-name-container button{
+    background-color: transparent;
+    border: none;
 }
 .product-filter-name-container::placeholder{
     color: #9e9e9e;
+}
+.product-filter-bottom-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.product-filter-category-container{
+    border-bottom: 1px solid #E1E1E1;
+
+}
+.product-filter-category-container select{
+    border: none;
+    background-color: transparent;
+    color: #9e9e9e;
+
+}
+.product-filter-category-container option{
+
 }
 @media(min-width:768px){
     .product-search-container{
