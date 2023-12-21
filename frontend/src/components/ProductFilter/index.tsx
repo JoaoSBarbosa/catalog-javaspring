@@ -46,7 +46,7 @@ export const ProductFilter = () => {
                         className={"form-control"}
                         placeholder={"Nome do produto"}
                     />
-                    <button>
+                    <button className={"product-filter-btn-icon"}>
                         <MagnifyingGlass size={22} color="#aaaaaa" weight="light"/>
                     </button>
                 </div>
@@ -60,14 +60,15 @@ export const ProductFilter = () => {
                                 <Select {...field}
                                         options={selectCategories}
                                         isClearable
+                                        placeholder={"Categoria"}
                                         getOptionLabel={(category: Category) => category.name}
                                         getOptionValue={(category: Category) => String(category.id)}
-                                        classNamePrefix={"product-crud-select"}
+                                        classNamePrefix={"product-filter-select"}
                                 />
                             )}
                         />
                     </div>
-                    <button className={"btn btn-outline-secondary"}>Limpar filtro</button>
+                    <button className={"btn btn-outline-secondary product-filter-btn-clear"}>Limpar <span className={"product-filter-btn-clear-word"}>filtro</span></button>
                 </div>
 
             </form>
