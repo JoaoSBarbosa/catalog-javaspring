@@ -1,0 +1,12 @@
+.product-search-container{
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+@media(min-width:768px){
+    .product-search-container{
+        flex: 1;
+        margin-bottom: 0;
+
+    }
+}

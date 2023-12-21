@@ -9,6 +9,7 @@ import {AxiosRequestConfig} from "axios";
 import {handleRequestBackend} from "../../../../util/request";
 import CatalogMagic from "../../../Catalog/loader";
 import {Pagination} from "../../../../components/Pagination";
+import {ProductFilter} from "../../../../components/ProductFilter";
 
 type ControlComponentsData = {
     activePage: number
@@ -42,7 +43,7 @@ export const List = () => {
                 .finally(() => {
                     setIsLoading(false);
                 });
-        },[controlComponentsData]);
+        }, [controlComponentsData]);
 
     useEffect(() => {
         handleGetProduct();
@@ -66,10 +67,10 @@ export const List = () => {
                 <Link to={"/admin/products/create"}>
                     <button className={"btn btn-primary btn-crud-add"}>ADICIONAR</button>
                 </Link>
-                <div className={"base-card product-search-container"}>
-                    Buscar produto por nome...
-                </div>
-
+                {/*<div className={"base-card product-search-container"}>*/}
+                {/*    Buscar produto por nome...*/}
+                {/*</div>*/}
+                <ProductFilter/>
             </div>
 
             <div className={"row"}>
