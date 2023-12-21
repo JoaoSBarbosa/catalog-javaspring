@@ -8,7 +8,7 @@ import {handleRequestBackend} from "../../util/request";
 
 type ProdyctFilter = {
     name: string;
-    category: Category;
+    category: Category | null;
 }
 export const ProductFilter = () => {
     const [selectCategories, setSelectCategories] = useState<Category[]>([]);
@@ -17,10 +17,12 @@ export const ProductFilter = () => {
         register,
         handleSubmit,
         control,
+        getValues,
+        setValue
     } = useForm<ProdyctFilter>();
 
     const onSubmit = (formData: ProdyctFilter) => {
-      console.log("Enviou: ",formData)
+        console.log("Enviou: ", formData)
     }
     useEffect(() => {
         handleRequestBackend({
@@ -31,6 +33,20 @@ export const ProductFilter = () => {
                 setSelectCategories(categoriesRequest);
             })
     }, []);
+
+    const handleFormClear = () => {
+        setValue('name', '');
+        setValue('category', null)
+    }
+    const handleChangeCategory =(value: Category)=>{
+        setValue('category', value);
+
+        const formObject: ProdyctFilter ={
+            name:getValues('name'),
+            category: getValues('category')
+        }
+        console.log(formObject)
+    }
     return (
         <div className={"base-card product-search-container"}>
 
@@ -40,7 +56,7 @@ export const ProductFilter = () => {
                 <div className={"product-filter-name-container"}>
                     <input
                         {
-                        ...register('name')}
+                            ...register('name')}
                         type="text"
                         name="name"
                         className={"form-control"}
@@ -58,6 +74,7 @@ export const ProductFilter = () => {
                             control={control}
                             render={({field}) => (
                                 <Select {...field}
+                                        onChange={value => handleChangeCategory(value as Category)}
                                         options={selectCategories}
                                         isClearable
                                         placeholder={"Categoria"}
@@ -68,7 +85,14 @@ export const ProductFilter = () => {
                             )}
                         />
                     </div>
-                    <button className={"btn btn-outline-secondary product-filter-btn-clear"}>Limpar <span className={"product-filter-btn-clear-word"}>filtro</span></button>
+                    <button
+                        className={"btn btn-outline-secondary product-filter-btn-clear"
+                        } onClick={handleFormClear}>
+                        Limpar
+                        <span className={"product-filter-btn-clear-word"}>
+                            filtro
+                        </span>
+                    </button>
                 </div>
 
             </form>
