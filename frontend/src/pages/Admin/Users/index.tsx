@@ -24,9 +24,11 @@ export const Users = () => {
             .then((response) => {
                 setPage(response.data)
                 setError(null)
+                console.log("Deu certo: ")
+
             })
             .catch((error) => {
-                console.log("Deu erro: ", error)
+                console.log(page?.content)
                 setError("Erro ao buscar usuários"+error)
             })
     }, [])

@@ -8,5 +8,6 @@ export type User={
         id:number;
         authority:string
     }
+    uriPhoto:string;
 
 }

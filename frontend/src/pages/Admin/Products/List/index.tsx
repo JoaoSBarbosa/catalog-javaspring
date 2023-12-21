@@ -2,7 +2,7 @@ import {ProductCrudCard} from "../ProductCrudCard";
 
 import "./styles.css";
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {SpringPage} from "../../../../types/vendor/SpringPage";
 import {Product} from "../../../../types/Product";
 import {AxiosRequestConfig} from "axios";
@@ -22,33 +22,36 @@ export const List = () => {
         {
             activePage: 0
         })
-    useEffect(() => {
-        // handleGetProduct();
-        const params: AxiosRequestConfig = {
-            method: 'GET',
-            url: "/produtos",
-            params: {
-                page: controlComponentsData.activePage,
-                size: 3,
-            }
-        };
-        setIsLoading(true);
 
-        handleRequestBackend(params)
-            .then((response) => {
-                setPage(response.data)
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    }, [controlComponentsData]);
+    const handleGetProduct = useCallback(
+        () => {
+            const params: AxiosRequestConfig = {
+                method: 'GET',
+                url: "/produtos",
+                params: {
+                    page: controlComponentsData.activePage,
+                    size: 3,
+                }
+            };
+            setIsLoading(true);
+
+            handleRequestBackend(params)
+                .then((response) => {
+                    setPage(response.data)
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        },[controlComponentsData]);
+
+    useEffect(() => {
+        handleGetProduct();
+    }, [handleGetProduct]);
 
     const handlePageChange = (pageNumber: number) => {
         setControlComponentsData({activePage: pageNumber})
     }
-    const handleGetProduct = () => {
 
-    }
 
     const [search, setSearch] = useState('');
 
@@ -81,7 +84,7 @@ export const List = () => {
                             <div key={product.id} className={"col-sm-6 col-md-12"}>
                                 <ProductCrudCard
                                     product={product}
-                                    onDelete={() => handleGetProduct}
+                                    onDelete={handleGetProduct}
                                 />
                             </div>
                         ))
